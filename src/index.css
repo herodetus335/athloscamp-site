@@ -1,0 +1,1019 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f97316;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ea580c;
+}
+
+/* Mobile Overrides - Only apply on screens up to 768px */
+@media screen and (max-width: 768px) {
+  /* Prevent horizontal scrolling */
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  /* Ensure all sections stretch full width */
+  section {
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* Container adjustments */
+  .max-w-7xl {
+    max-width: 100vw;
+    width: 100vw;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Additional container fixes */
+  .max-w-6xl, .max-w-4xl, .max-w-3xl {
+    max-width: 100vw;
+    width: 100vw;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Ensure all content containers are properly sized */
+  .container, .mx-auto {
+    max-width: 100vw;
+    width: 100vw;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Fix any potential overflow issues */
+  * {
+    box-sizing: border-box;
+  }
+
+  /* 1. Global text & spacing */
+  html { font-size: 14px; }
+  h1  { font-size: 24px; }
+  h2  { font-size: 20px; }
+  body { line-height: 1.4; }
+  .section { padding: 24px 16px; }
+
+  /* 2. Header */
+  header          { height: 56px; padding: 0 16px; }
+  nav.primary     { display: none; }
+  .hamburger      { display: block; }
+  .cta-register   { width: 40px; height: 40px; }
+
+  /* 3. Hero */
+  .hero           { padding: 32px 0; }
+  .hero h1        { margin-bottom: 12px; }
+  .hero .subhead  { font-size: 16px; margin-bottom: 16px; text-align: center !important; }
+  .hero p.subhead { text-align: center !important; }
+  .hero p         { text-align: center; margin: 0.5rem auto; }
+  .hero .ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  /* 4. Stats */
+  .stats          { display: flex; overflow-x: auto; gap: 12px; }
+  .stat           { flex: 0 0 80px; text-align: center; }
+
+  /* 5. Gallery - Mobile 2x2 Grid */
+  /* Gallery styles removed to prevent conflicts with React component */
+
+  /* 6. Testimonial */
+  .testimonial        { width: 90vw; margin: 16px auto; }
+  .testimonial .stars { font-size: 16px; }
+  .testimonial .quote { font-size: 14px; }
+
+  /* 7. Meet Coach Mike */
+  /* Coach image styles removed to prevent conflicts */
+  .coach .bio     { font-size: 14px; line-height: 1.4; }
+
+  /* 8. Features */
+  .features       { display: flex; overflow-x: auto; gap: 12px; }
+  .feature-card   { flex: 0 0 200px; }
+
+  /* 9. Location */
+  .location       { padding: 16px; }
+  .location img   { height: 120px; object-fit: cover; margin-bottom: 12px; }
+  .location .btn  { width: 100%; }
+
+  /* 10. Our Offerings */
+  /* Offerings display rule removed to show on mobile */
+  .offerings-accordion{ display: block; }
+  .offerings-accordion .panel-header { font-size: 14px; }
+
+  /* 11. Early Bird Special */
+  .early-bird         { padding: 16px; }
+  .early-bird .btn    { width: 100%; margin-top: 12px; }
+
+  /* 12. Registration */
+  .registration-tabs  { display: flex; gap: 8px; margin-bottom: 16px; }
+  .registration-tabs .tab { flex: 1; text-align: center; }
+  .form, .info        { width: 100%; }
+  .form input,
+  .form select,
+  .form textarea     { width: 100%; margin-bottom: 8px; }
+  .form .btn         { width: 100%; margin-top: 16px; }
+
+  /* 13. Footer */
+  .footer .social     { text-align: center; margin-bottom: 16px; }
+  .footer .links      { display: none; }
+  .footer .accordion  { display: block; }
+
+  /* 14. Hero content wrapper - ensure all children stack and center */
+  .hero .content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 1rem !important;            /* equal padding all around */
+    box-sizing: border-box !important;
+  }
+
+  /* 15. Center and constrain the subheader */
+  .hero .content p {
+    max-width: 90vw !important;           /* never wider than the viewport minus padding */
+    text-align: center !important;
+    margin: 0 0 1.25rem !important;       /* push it away from the headline and button */
+    font-size: 1rem !important;           /* a comfortable 16px */
+    line-height: 1.5 !important;          /* easy reading without too much wrap */
+  }
+
+  /* 16. Center-justified info cards row */
+  .hero .info-cards {
+    display: flex !important;
+    justify-content: space-evenly !important;  /* evenly space all three cards */
+    align-items: flex-start !important;
+    padding: 0 1rem !important;                /* match the hero's side padding */
+    margin: 0 auto !important;
+  }
+  
+  .hero .info-card {
+    flex: 1 1 auto !important;
+    max-width: 28% !important;                 /* three cards fit neatly in a row */
+    padding: 0.5rem !important;                /* keep them compact */
+    box-sizing: border-box !important;
+  }
+}
+
+.btn-orange {
+  background: linear-gradient(90deg, #fa6419 0%, #ff9933 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* iPhone SE and smaller (max-width: 320px) */
+@media (max-width: 320px) {
+  .se-mobile {
+    /* iPhone SE-specific styles */
+  }
+  
+  /* Hero section cards - shrink and center to prevent horizontal scroll */
+  .hero .stats {
+    max-width: 280px;
+    margin: 0 auto;
+    gap: 0.5rem;
+  }
+  
+  .hero .stat {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .hero .stat .h-8 {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  
+  .hero .stat .text-lg {
+    font-size: 0.875rem;
+  }
+  
+  .hero .stat .text-sm {
+    font-size: 0.75rem;
+  }
+}
+
+/* iPhone SE and smaller screens (max-width: 375px) */
+@media (max-width: 375px) {
+  /* 1. Scale the hero gradient dynamically */
+  .hero {
+    /* Make the fade zones 15% of the hero height, not a fixed 50px */
+    background-size: 100% 15%, 100% 15%;
+    background-position: top, bottom;
+  }
+  
+  /* 2. Tweak the hero min-height and padding */
+  .hero {
+    min-height: 380px;    /* Down from 450px or whatever you had */
+    padding-bottom: 1rem; /* Tighten the gap before the gallery */
+  }
+  
+  /* 3. Scale down your headline and subhead */
+  .hero h1 {
+    font-size: 1.5rem;    /* Instead of 2rem+ */
+    line-height: 1.2;
+  }
+  
+  .hero p {
+    font-size: 0.9rem;    /* Pull in the copy a bit */
+    line-height: 1.4;
+  }
+  
+  /* 4. Additional SE-specific optimizations */
+  .hero .ctas {
+    margin-bottom: 1rem;  /* Reduce space before cards */
+  }
+  
+  .hero .ctas button {
+    font-size: 0.875rem;  /* Smaller button text */
+    padding: 0.75rem 1rem; /* Tighter button padding */
+  }
+}
+
+/* iPhone SE and smaller screens (max-width: 375px) - FIXED VERSION */
+@media (max-width: 375px) {
+  /* 1. Add more top spacing and increase header size */
+  .hero {
+    padding-top: 4rem;    /* Add significant top spacing */
+    min-height: 100vh;    /* Full viewport height */
+    overflow-x: hidden;   /* Prevent horizontal scroll */
+    width: 100%;          /* Ensure full width */
+  }
+  
+  /* 2. Make header larger to match larger phones */
+  .hero h1 {
+    font-size: 2.5rem;    /* Much larger header */
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* 3. Adjust subhead for better spacing */
+  .hero p {
+    font-size: 1rem;      /* Slightly larger subhead */
+    line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+  
+  /* 4. Optimize CTA buttons */
+  .hero .ctas {
+    margin-bottom: 2rem;
+  }
+  
+  .hero .ctas button {
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+  }
+  
+  /* 1) Ensure the wrapper is full-width and centers its children */
+  .hero .stats {
+    display: flex !important;
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 0 0.5rem !important;   /* 8px gutters each side */
+    gap: 4px !important;            /* 4px between cards */
+    margin: 0 auto !important;
+  }
+
+  /* 2) Size cards to ~28% each, with tiny side margins */
+  .hero .stat {
+    flex: 0 1 28% !important;       /* roughly three across with room */
+    max-width: 28% !important;
+    margin: 0 !important;           /* gap handled by container's gap */
+    padding: 0.3rem 0.5rem !important;   /* less top/bottom space */
+    white-space: normal !important;       /* allow proper line breaks */
+    line-height: 1.3 !important;          /* improve readability */
+    backdrop-filter: blur(8px) !important;
+    background: rgba(255,255,255,0.15) !important;
+    border-radius: 12px !important;
+    box-sizing: border-box !important;
+    opacity: 1 !important;
+    max-height: 6.5rem !important;       /* adjust until they look right */
+    overflow: hidden !important;         /* hide any extra content */
+  }
+
+  /* 3) Shrink line-height and font-size inside the cards */
+  .hero .stat p,
+  .hero .stat .text-lg,
+  .hero .stat .text-sm {
+    font-size: 0.8rem !important;        /* smaller text */
+    line-height: 1.2 !important;         /* tighter lines */
+    margin-bottom: 0.2rem !important;    /* less gap below each line */
+  }
+}
+
+/* General mobile (321px to 640px) */
+@media (min-width: 321px) and (max-width: 640px) {
+  .general-mobile {
+    /* General mobile styles */
+  }
+}
+
+/* Larger phones (376px-640px) - Hero section adjustments */
+@media (min-width: 376px) and (max-width: 640px) {
+  /* Center the cards container */
+  .hero .stats {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+    padding: 0 0.5rem !important;   /* 8px gutters each side */
+    gap: 4px !important;            /* 4px between cards */
+    width: 100% !important;
+  }
+
+  /* Apply SE card styling but larger */
+  .hero .stat {
+    flex: 0 1 calc((100% - 2 * 8px) / 3) !important;
+    margin: 0 0.125rem !important;
+    padding: 0.5rem 0.75rem !important;   /* slightly larger than SE */
+    white-space: normal !important;
+    line-height: 1.3 !important;
+    backdrop-filter: blur(8px) !important;
+    background: rgba(255,255,255,0.15) !important;
+    border-radius: 12px !important;
+    box-sizing: border-box !important;
+    opacity: 1 !important;
+    max-height: 8rem !important;       /* larger than SE's 6.5rem */
+    overflow: hidden !important;
+  }
+
+  /* Larger text styling than SE */
+  .hero .stat p,
+  .hero .stat .text-lg,
+  .hero .stat .text-sm {
+    font-size: 0.9rem !important;        /* larger than SE's 0.8rem */
+    line-height: 1.2 !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  /* Center the subheader text */
+  .hero .subhead {
+    text-align: center !important;
+  }
+  
+  .hero p.subhead {
+    text-align: center !important;
+  }
+
+  /* 3. Center the subtitle text under the H1 */
+  .hero .hero-subtitle,
+  .hero p {
+    text-align: center !important;
+    margin: 0.5rem auto !important;
+  }
+}
+
+/* Desktop (641px and up) */
+@media (min-width: 641px) {
+  /* Desktop styles are handled by Tailwind's md: breakpoint */
+}
+
+/* Desktop-only tweaks for compact cards */
+@media (min-width: 641px) {
+  /* 1) Program-Details cards (the 4 info cards) */
+  #programs .bg-white\/10 {
+    /* cut all padding in half */
+    padding: 0.75rem !important;
+    /* lighter background blur */
+    background: rgba(255,255,255,0.08) !important;
+    backdrop-filter: blur(4px) !important;
+  }
+  #programs .bg-white\/10 .font-semibold {
+    /* shrink heading text */
+    font-size: 0.875rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+  #programs .bg-white\/10 .text-sm {
+    /* shrink secondary text */
+    font-size: 0.75rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* 2) Half-Day & Full-Day cards */
+  #programs .bg-white.rounded-xl {
+    /* collapse to content */
+    padding: 0.75rem !important;
+    min-height: 0 !important;
+    /* tighter vertical spacing */
+    margin-bottom: 0.5rem !important;
+  }
+  #programs .bg-white.rounded-xl h3 {
+    /* slightly smaller title */
+    font-size: 1.125rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+  #programs .bg-white.rounded-xl .space-x-4 {
+    /* pull in the icons/text rows */
+    margin-bottom: 0.25rem !important;
+  }
+  #programs .bg-white.rounded-xl p {
+    margin-bottom: 0.25rem !important;
+  }
+  #programs .bg-white.rounded-xl .bg-orange-50 {
+    padding: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+  #programs .bg-white.rounded-xl button {
+    padding: 0.5rem 1rem !important;
+    margin-top: 0.25rem !important;
+  }
+
+  /* 3) Inline Early-Bird badge */
+  #programs .bg-orange-50 {
+    display: inline-block !important;
+    margin-top: 0.5rem !important;
+    padding: 0.25rem 0.75rem !important;
+    font-size: 0.85rem !important;
+    background-color: rgba(251,146,60,0.1) !important;
+    border: 1px solid rgba(251,146,60,0.3) !important;
+    border-radius: 4px !important;
+  }
+
+  /* 4) Compact and center experience cards */
+  #programs .bg-white.rounded-xl {
+    padding: 0.5rem 1.5rem !important;       /* shrink vertical padding */
+    max-width: 500px !important;                      /* cap width so it doesn't stretch too wide */
+    margin: 0 auto 1rem !important;                   /* reduce bottom gap */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;        /* center all children */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
+  }
+
+  /* 5) Add a contrast background behind the title */
+  #programs .bg-white.rounded-xl h3 {
+    background: rgba(0,0,0,0.1) !important; /* subtle dark overlay */
+    padding: 0.25rem 0.75rem !important;
+    border-radius: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    width: 100% !important;
+    text-align: center !important;
+    font-size: 1rem !important;
+  }
+
+  /* 6) Center the details rows */
+  #programs .bg-white.rounded-xl .space-x-4 {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+    margin-bottom: 0.5rem !important;
+    width: 100% !important;
+  }
+
+  /* 7) Center and constrain the time-block & Early-Bird badge */
+  #programs .bg-white.rounded-xl .space-x-4 > div,
+  #programs .bg-orange-50 {
+    width: auto !important;
+    padding: 0.25rem 0.75rem !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    font-size: 0.8rem !important;
+    border-radius: 0.5rem !important;
+  }
+
+  /* 8) Center the Register button */
+  #programs .bg-white.rounded-xl button {
+    margin: 0.5rem auto 0 !important;
+    width: auto !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 0.875rem !important;
+  }
+
+  /* 9. Experience cards layout and centering */
+  #programs .offerings {
+    display: flex !important;
+    width: 100% !important;             /* match the width of the container above */
+    gap: 1rem !important;               /* 16px space between them */
+  }
+
+  /* 10. Make each card calc'd to half the width minus half the gap */
+  #programs .bg-white.rounded-xl {
+    flex: 0 1 calc(50% - 0.5rem) !important;
+    max-width: calc(50% - 0.5rem) !important;
+    padding: 1.5rem !important;         /* keep your desired inner padding */
+    box-sizing: border-box !important;  
+  }
+
+  /* 11. Center the content inside each card */
+  #programs .bg-white.rounded-xl .space-x-4,
+  #programs .bg-white.rounded-xl .bg-orange-50,
+  #programs .bg-white.rounded-xl button {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+
+  /* 12. Force the details row into a centered flex */
+  #programs .bg-white.rounded-xl .space-x-4 {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 1rem !important;               /* space between clock and price */
+  }
+
+  /* 13. Make sure the headline bar and badge also center */
+  #programs .bg-white.rounded-xl h3,
+  #programs .bg-white.rounded-xl .bg-orange-50 {
+    width: auto !important;
+  }
+}
+
+/* Desktop-only: Compress Our Offerings section and registration form */
+@media (min-width: 1024px) {
+  /* Compress Our Offerings section */
+  #programs {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  #programs .text-center {
+    margin-bottom: 1rem !important;
+  }
+
+  #programs h2 {
+    font-size: 3rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #programs p {
+    font-size: 1.25rem !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 2rem !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  #programs .bg-gradient-to-r {
+    padding: 1.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  #programs .bg-gradient-to-r h3 {
+    font-size: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #programs .grid {
+    gap: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #programs .bg-white\/10 {
+    padding: 0.75rem !important;
+  }
+
+  #programs .bg-white\/10 .h-8 {
+    height: 1.5rem !important;
+    width: 1.5rem !important;
+  }
+
+  #programs .bg-white\/10 .font-semibold {
+    font-size: 0.875rem !important;
+  }
+
+  #programs .bg-white\/10 .text-sm {
+    font-size: 0.75rem !important;
+  }
+
+  #programs .offerings {
+    gap: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  #programs .bg-white.rounded-xl {
+    padding: 0.75rem !important;
+    min-height: auto !important;
+  }
+
+  #programs .bg-white.rounded-xl h3 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  #programs .bg-white.rounded-xl .space-x-4 {
+    margin-bottom: 0.25rem !important;
+  }
+
+  #programs .bg-white.rounded-xl .text-2xl {
+    font-size: 1.25rem !important;
+  }
+
+  #programs .bg-white.rounded-xl p {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  #programs .bg-white.rounded-xl .bg-orange-50 {
+    padding: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  #programs .bg-white.rounded-xl .text-sm {
+    font-size: 0.75rem !important;
+  }
+
+  #programs .bg-white.rounded-xl button {
+    padding: 0.75rem 1.5rem !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    background-color: #f97316 !important;
+    color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  #programs .bg-white.rounded-xl button:hover {
+    background-color: #ea580c !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  /* Keep registration form compact */
+  #contact .bg-white\/10 {
+    padding: 1rem !important;
+  }
+
+  #contact .grid {
+    gap: 1rem !important;
+  }
+
+  #contact input, #contact textarea, #contact select {
+    padding: 0.5rem !important;
+    font-size: 0.875rem !important;
+  }
+
+  #contact button {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.875rem !important;
+  }
+
+  /* Add padding above header and shrink header size */
+  #contact h2 {
+    padding-top: 5rem !important;
+    font-size: 3rem !important;
+  }
+
+  /* Format contact information like quick facts cards */
+  #contact .contact-info {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 1rem !important;
+  }
+
+  #contact .contact-info > div {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 12px !important;
+    padding: 1rem !important;
+    text-align: center !important;
+  }
+
+  #contact .contact-info .icon {
+    height: 2rem !important;
+    width: 2rem !important;
+    margin: 0 auto 0.5rem !important;
+    color: #f97316 !important;
+  }
+
+  #contact .contact-info .font-semibold {
+    font-size: 1rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  #contact .contact-info .text-sm {
+    font-size: 0.875rem !important;
+    opacity: 0.8 !important;
+  }
+
+  /* Desktop-only experience cards styling */
+  /* 1) Layout: side-by-side, same combined width as panel above */
+  .experience-cards {
+    display: flex;
+    justify-content: space-between;      /* push cards to each edge */
+    width: 100%;                         /* match wrapper width */
+    gap: 1rem;                           /* 16px between the two */
+  }
+
+  /* 2) Card container: compact, box-shadow, rounded corners */
+  .experience-card {
+    flex: 0 1 calc((100% - 1rem) / 2);   /* each = half width minus half gap */
+    max-width: calc((100% - 1rem) / 2);
+    background: #fff !important;
+    border-radius: 0.75rem !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
+    padding: 1.25rem 1.5rem !important;  /* slightly tighter than before */
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    text-align: center !important;      /* center everything by default */
+  }
+
+  /* 3) Title band: subtle contrast behind the H3 */
+  .experience-card h3 {
+    background: rgba(0,0,0,0.1) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 0.5rem !important;
+    margin-bottom: 1rem !important;
+    font-size: 1.25rem !important;
+  }
+
+  /* 4) Details row: centered flex of time & price */
+  .experience-card .details {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+  .experience-card .details span {
+    font-size: 1rem !important;
+    line-height: 1.3 !important;
+  }
+
+  /* 5) Early-Bird badge: small pill, centered */
+  .experience-card .early-bird {
+    display: inline-block !important;
+    background: rgba(251,146,60,0.1) !important;
+    border: 1px solid rgba(251,146,60,0.3) !important;
+    padding: 0.25rem 0.75rem !important;
+    border-radius: 0.375rem !important;
+    margin: 0 auto 1rem !important;
+    font-size: 0.85rem !important;
+    text-align: center !important;
+  }
+
+  /* 6) Register button: centered under badge */
+  .experience-card .btn-primary {
+    display: inline-block !important;
+    margin: 0 auto !important;
+    padding: 0.75rem 1.5rem !important;
+  }
+
+  /* Ultra-compact desktop experience cards */
+  /* 1) Tee up side-by-side, exact combined width, tiny gap */
+  .experience-cards {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;           /* same as program-panel wrapper */
+    gap: 0.5rem;           /* just 8px between cards */
+  }
+  .experience-card {
+    flex: 0 1 calc((100% - 0.5rem)/2);
+    max-width: calc((100% - 0.5rem)/2);
+    /* strip padding down to the bare minimum */
+    padding: 0.5rem 1rem !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+  }
+
+  /* 2) Slim down the title bar */
+  .experience-card h3 {
+    font-size: 1rem !important;
+    line-height: 1.2 !important;
+    padding: 0.25rem 0.5rem !important;
+    margin: 0 0 0.5rem !important;
+    background: rgba(0,0,0,0.05) !important;
+    border-radius: 0.25rem !important;
+    text-align: center;
+  }
+
+  /* 3) Collapse the time + price into one tight row */
+  .experience-card .details {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    margin: 0 0 0.5rem !important;
+  }
+  .experience-card .details span {
+    font-size: 0.875rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* 4) Combine badges into a single line (if you haven't: wrap them in .badges) */
+  .experience-card .badges {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    margin: 0 0 0.5rem !important;
+  }
+  .experience-card .badges span {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    border-radius: 0.25rem !important;
+  }
+
+  /* 5) Tiny, centered Register button */
+  .experience-card .btn-primary {
+    margin: 0 auto !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 0.875rem !important;
+  }
+}
+
+/* Redesigned Experience Cards Styles */
+.offerings-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    z-index: 1;
+}
+
+.offering-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+}
+
+.offering-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+    border-radius: 20px 20px 0 0;
+}
+
+.offering-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.card-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.card-description {
+    color: #718096;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.price-badge {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+    min-width: 80px;
+    text-align: center;
+}
+
+.time-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: rgba(249, 115, 22, 0.1);
+    border-radius: 12px;
+    border-left: 4px solid #f97316;
+}
+
+.time-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.75rem;
+    color: #f97316;
+}
+
+.time-text {
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(76, 175, 80, 0.05);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.feature-item:hover {
+    background: rgba(76, 175, 80, 0.1);
+    transform: translateX(5px);
+}
+
+.check-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 0.75rem;
+}
+
+.feature-text {
+    color: #4a5568;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.cta-button {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(249, 115, 22, 0.6);
+}
+
+.full-day-card {
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .offerings-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .offering-card {
+        padding: 2rem;
+    }
+}

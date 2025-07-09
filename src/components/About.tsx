@@ -1,0 +1,228 @@
+import React, { useState } from 'react';
+import { Search, Handshake, Building, Shield, Star } from 'lucide-react';
+
+const locationImages = [
+  { src: "/pavilion.jpg", alt: "Pavilion at Potomac Green Neighborhood Park" },
+  { src: "/field-purple-circles.jpg", alt: "Aerial field with purple circles" },
+  { src: "/eastgate-park-sign.jpg", alt: "Eastgate Park sign and playground" },
+  { src: "/field-parking-lot.jpg", alt: "Aerial field and parking lot" },
+];
+
+const LocationCarousel = () => {
+  const [index, setIndex] = useState(0);
+  const prev = () => setIndex(i => (i === 0 ? locationImages.length - 1 : i - 1));
+  const next = () => setIndex(i => (i === locationImages.length - 1 ? 0 : i + 1));
+  return (
+    <div className="relative flex items-center justify-center mb-8" style={{height: 320}}>
+      <button onClick={prev} className="absolute left-0 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300" style={{ borderRadius: 0, top: '50%', transform: 'translateY(-50%)' }} aria-label="Previous">
+        <svg width="32" height="32" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <img src={locationImages[index].src} alt={locationImages[index].alt} className="object-cover w-full max-w-3xl h-80 mx-auto" style={{borderRadius: 0, boxShadow: 'none'}} />
+      <button onClick={next} className="absolute right-0 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300" style={{ borderRadius: 0, top: '50%', transform: 'translateY(-50%)' }} aria-label="Next">
+        <svg width="32" height="32" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  );
+};
+
+const locationCardImages = [
+  { src: "/Pavilion 2 Potomac Green.jpg", alt: "Pavilion 2 Potomac Green" },
+  { src: "/sittingareapg.jpg", alt: "Pavilion Sitting Area" },
+  { src: "/pgonmap.jpg", alt: "Potomac Green on Map" },
+  { src: "/pgsign.jpg", alt: "Potomac Green Park Sign" },
+];
+
+const LocationCardCarousel = () => {
+  const [index, setIndex] = useState(0);
+  const prev = () => setIndex(i => (i === 0 ? locationCardImages.length - 1 : i - 1));
+  const next = () => setIndex(i => (i === locationCardImages.length - 1 ? 0 : i + 1));
+  const img = locationCardImages[index];
+  return (
+    <div className="md:w-1/2 w-full h-64 md:h-auto relative flex items-center justify-center" style={{background: '#eee'}}>
+      <button onClick={prev} className="absolute left-0 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300" style={{ borderRadius: 0, top: '50%', transform: 'translateY(-50%)' }} aria-label="Previous">
+        <svg width="32" height="32" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <img src={img.src} alt={img.alt} className="object-cover w-full h-full" style={{borderRadius: 0, boxShadow: 'none'}} />
+      <button onClick={next} className="absolute right-0 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300" style={{ borderRadius: 0, top: '50%', transform: 'translateY(-50%)' }} aria-label="Next">
+        <svg width="32" height="32" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  );
+};
+
+const About = () => {
+  const benefits = [
+    {
+      icon: Search,
+      title: "Foundations First",
+      description: "Each day introduces a new core movement skill with targeted drills that build progressively."
+    },
+    {
+      icon: Building,
+      title: "Structured Daily Format",
+      description: "Three cycles daily: energizing games → healthy snack break → focused skill work."
+    },
+    {
+      icon: Handshake,
+      title: "Personalized Coaching",
+      description: "Small groups ensure one-on-one feedback and goal-setting for individual growth."
+    },
+    {
+      icon: Shield,
+      title: "Expert Safety Oversight",
+      description: "Certified trainers lead every activity with chaperone support during breaks."
+    },
+    {
+      icon: Star,
+      title: "Leadership & Camaraderie",
+      description: "Collaborative quests build leadership skills and lasting peer networks."
+    }
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === benefits.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+  
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? benefits.length - 1 : prevIndex - 1
+    );
+  };
+
+  return (
+    <section id="about" className="pt-24 pb-20 relative overflow-hidden">
+      {/* Cool background gradient and pattern (now handled globally) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+            Why Choose Athlos Fitness Camp?
+          </h2>
+          <div className="md:hidden text-center">
+            <div className="flex justify-center">
+              <p className="text-xl text-blue-100 max-w-3xl leading-relaxed drop-shadow text-center">
+                For an action-packed five days, we'll guide your child through ever-changing challenges that build real strength, agility, and confidence.
+              </p>
+            </div>
+          </div>
+          <div className="hidden md:block">
+            <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed drop-shadow">
+              For an action-packed five days, we'll guide your child through ever-changing challenges that build real strength, agility, and confidence.
+            </p>
+          </div>
+        </div>
+
+        {/* Mobile Carousel */}
+        <div className="md:hidden relative">
+          <button 
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300 rounded-full"
+            aria-label="Previous"
+          >
+            <svg width="24" height="24" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          
+          <div className="overflow-hidden">
+            <div className="flex transition-transform duration-300" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+              {benefits.map((benefit, index) => (
+                <div key={index} className="w-full flex-shrink-0 px-4">
+                  <div className="bg-gradient-to-br from-blue-50 to-orange-50 p-6 rounded-xl shadow-lg border border-blue-100">
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-gradient-to-r from-blue-500 to-orange-500 p-3 rounded-lg">
+                        <benefit.icon className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">{benefit.title}</h3>
+                        <p className="text-gray-600 leading-relaxed text-sm">{benefit.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <button 
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300 rounded-full"
+            aria-label="Next"
+          >
+            <svg width="24" height="24" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+
+        {/* Desktop Layout */}
+        <div className="hidden md:block">
+          <div className="flex justify-center space-x-8 mb-8">
+            {benefits.slice(0, 3).map((benefit, index) => (
+              <div 
+                key={index}
+                className="bg-gradient-to-br from-blue-50 to-orange-50 p-8 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 border border-blue-100 h-full w-full max-w-md"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gradient-to-r from-blue-500 to-orange-500 p-3 rounded-lg">
+                    <benefit.icon className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{benefit.title}</h3>
+                    <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom two items centered */}
+          <div className="flex justify-center space-x-8">
+            {benefits.slice(3, 5).map((benefit, index) => (
+              <div 
+                key={index + 3}
+                className="bg-gradient-to-br from-blue-50 to-orange-50 p-8 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 border border-blue-100 h-full w-full max-w-md"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gradient-to-r from-blue-500 to-orange-500 p-3 rounded-lg">
+                    <benefit.icon className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{benefit.title}</h3>
+                    <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Location Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-0 pt-24 pb-6">
+        <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-6">Where are we located?</h2>
+        <div className="flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden">
+          {/* Left: Pavilion Image Carousel */}
+          <LocationCardCarousel />
+          {/* Right: Location and Capacity */}
+          <div className="md:w-1/2 w-full flex flex-col justify-center p-8 bg-gradient-to-br from-blue-50 to-orange-50">
+            <div className="mb-4">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Potomac Green Neighborhood Park</h3>
+              <p className="text-lg text-gray-700 mb-2">20750 Marblehead Dr, Ashburn, VA 20147</p>
+              <p className="text-md text-gray-600">Sheltered Pavilion • Restrooms • Ample Parking</p>
+            </div>
+            <div className="flex items-center space-x-3 mt-4">
+              <span className="inline-block bg-orange-500 text-white rounded-full px-4 py-2 text-sm font-semibold">Capacity: 45+ people</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* End Location Section */}
+
+      {/* Reduce padding above Our Offerings */}
+     
+    </section>
+  );
+};
+
+export default About;
