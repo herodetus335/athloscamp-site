@@ -85,7 +85,7 @@ const Gallery = () => {
   return (
     <section id="gallery" className="py-28 relative" style={{ background: 'none', boxShadow: 'none' }}>
       {/* Blue gradient fade at top of gallery */}
-      <div className="absolute top-0 left-0 right-0 h-32 md:h-40 bg-gradient-to-b from-blue-900/90 via-blue-800/80 via-blue-700/60 via-blue-600/40 via-blue-500/20 to-transparent z-10" />
+      <div className="absolute top-0 left-0 right-0 h-20 md:h-24 bg-gradient-to-b from-blue-900/60 via-blue-800/40 via-blue-700/25 to-transparent z-10" />
       
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
         <div className="mb-8">
