@@ -3,9 +3,16 @@ import { ChevronDown, Award, Users, Calendar } from 'lucide-react';
 
 const Hero = () => {
   const scrollToGallery = () => {
-    const element = document.querySelector('#gallery');
+    const element = document.querySelector('#gallery') as HTMLElement;
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Scroll to gallery but leave some space from the top to keep nav bar normal
+      const elementTop = element.offsetTop;
+      const offsetPosition = elementTop - 120; // Leave 120px from top so nav stays normal
+      
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: 'smooth'
+      });
     }
   };
 
