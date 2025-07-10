@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const Programs = () => {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('half-day');
+  const [showScrollArrow, setShowScrollArrow] = useState(false);
 
   const commonDetails = {
     title: "5-Day Fitness Foundation Program",
@@ -72,14 +73,78 @@ const Programs = () => {
     window.dispatchEvent(event);
     
     // Scroll to contact section
-    const element = document.querySelector('#contact');
+    const element = document.querySelector('#contact') as HTMLElement;
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
+  const scrollToNextSection = () => {
+    const offeringsCards = document.querySelector('#offerings-cards') as HTMLElement;
+    if (offeringsCards) {
+      // Calculate how much to scroll down to show full cards
+      const currentScrollTop = window.pageYOffset;
+      const cardsRect = offeringsCards.getBoundingClientRect();
+      const cardsBottom = cardsRect.bottom + currentScrollTop;
+      const viewportHeight = window.innerHeight;
+      const headerOffset = 100; // Space for navigation
+      
+      // Scroll down to position where cards are fully visible with some padding
+      const targetPosition = cardsBottom - viewportHeight + headerOffset;
+      
+      // Only scroll down, never up
+      if (targetPosition > currentScrollTop) {
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+    setShowScrollArrow(false); // Hide arrow after clicking
+  };
+
+  // Listen for navigation events to show arrow
+  React.useEffect(() => {
+    const handleNavigationToPrograms = () => {
+      console.log('programsNavigated event received - showing arrow');
+      setShowScrollArrow(true);
+    };
+
+    console.log('Adding programsNavigated event listener');
+    window.addEventListener('programsNavigated', handleNavigationToPrograms as EventListener);
+    
+    return () => {
+      console.log('Removing programsNavigated event listener');
+      window.removeEventListener('programsNavigated', handleNavigationToPrograms as EventListener);
+    };
+  }, []);
+
+  // Hide arrow immediately on any scroll movement
+  React.useEffect(() => {
+    console.log('showScrollArrow state changed to:', showScrollArrow);
+    if (!showScrollArrow) return;
+
+    const handleScroll = () => {
+      console.log('User scrolled - hiding arrow');
+      setShowScrollArrow(false);
+    };
+
+    // Add a small delay before attaching scroll listener to avoid immediate trigger from navigation scroll
+    const timer = setTimeout(() => {
+      console.log('Attaching scroll listener for arrow');
+      window.addEventListener('scroll', handleScroll);
+    }, 600); // Wait for navigation scroll and event dispatch to complete
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [showScrollArrow]);
+
+  console.log('Rendering Programs component, showScrollArrow:', showScrollArrow);
+
   return (
-    <section id="programs" className="pt-4 pb-20">
+    <section id="programs" className="pt-4 pb-20 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
@@ -87,12 +152,12 @@ const Programs = () => {
           </h2>
           {/* Desktop-only paragraph */}
           <p className="hidden md:block text-xl text-blue-100 max-w-3xl mx-auto">
-            Choose from our immersive 5-day fitness foundation experiences designed to build healthy habits and athletic skills for life.
+            Three exciting blocks to choose from. Select half-day or full-day options that fit your family's schedule perfectly.
           </p>
           {/* Mobile-only centering wrapper */}
           <div className="md:hidden flex justify-center">
             <p className="text-xl text-blue-100 max-w-3xl text-center">
-              Choose from our immersive 5-day fitness foundation experiences designed to build healthy habits and athletic skills for life.
+              Three exciting blocks to choose from. Select half-day or full-day options that fit your family's schedule perfectly.
             </p>
           </div>
         </div>
@@ -365,6 +430,20 @@ const Programs = () => {
           </div>
         </div>
       </div>
+      
+      {/* Scroll Down Arrow - Desktop Only */}
+      {showScrollArrow && (
+        <div className="hidden md:block fixed bottom-8 left-1/2 -translate-x-1/2 z-20 transition-opacity duration-500">
+          <button 
+            onClick={scrollToNextSection}
+            className="text-white hover:text-orange-400 transition-all duration-300 animate-bounce bg-black/60 backdrop-blur-sm rounded-full p-3 shadow-xl border border-white/20 flex items-center justify-center"
+            title="Scroll to see more"
+          >
+            <ChevronDown className="h-6 w-6" />
+          </button>
+        </div>
+      )}
+      {/* Debug: {showScrollArrow ? 'Arrow should be visible' : 'Arrow should be hidden'} */}
     </section>
   );
 };

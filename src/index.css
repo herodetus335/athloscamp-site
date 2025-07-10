@@ -1069,6 +1069,7 @@ body {
     gap: 2.5rem;
     max-width: 1400px;
     padding: 0 1rem;
+    margin-left: -3rem;
   }
   .offering-card {
     padding: 1rem 3rem 1rem 3rem;

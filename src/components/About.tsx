@@ -115,24 +115,28 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="pt-24 pb-20 relative overflow-hidden">
+    <section id="about" className="pt-16 md:pt-24 pb-12 md:pb-20 relative overflow-hidden">
       {/* Cool background gradient and pattern (now handled globally) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Desktop Header */}
+        <div className="hidden md:block text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+            Why Choose Athlos Camp?
+          </h2>
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed drop-shadow">
+            Expert coaching, proven methodology, and personalized attention in a safe, supportive environment that creates lasting results.
+          </p>
+        </div>
+
+        {/* Mobile Header */}
         <div className="text-center mb-16 md:hidden">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
             Why Choose Athlos Fitness Camp?
           </h2>
-          <div className="md:hidden text-center">
-            <div className="flex justify-center">
-              <p className="text-xl text-blue-100 max-w-3xl leading-relaxed drop-shadow text-center">
-                For an action-packed five days, we'll guide your child through ever-changing challenges that build real strength, agility, and confidence.
-              </p>
-            </div>
-          </div>
-          <div className="hidden md:block">
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed drop-shadow">
-              For an action-packed five days, we'll guide your child through ever-changing challenges that build real strength, agility, and confidence.
-            </p>
+          <div className="flex justify-center">
+                         <p className="text-xl text-blue-100 max-w-3xl leading-relaxed drop-shadow text-center">
+               Expert coaching, proven methodology, and personalized attention in a safe, supportive environment that creates lasting results.
+             </p>
           </div>
         </div>
 
@@ -219,7 +223,7 @@ const About = () => {
       </div>
 
       {/* Location Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-0 pt-24 pb-6">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-0 pt-20 md:pt-32 pb-6">
         <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-6">Camp Location</h2>
         <div className="flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden">
           {/* Left: Pavilion Image Carousel */}

@@ -41,12 +41,20 @@ const Navigation = () => {
       const element = document.querySelector(href);
       if (element) {
         if (href === '#programs') {
-          // For programs, scroll to show the full offerings section without cutting off
-          const offsetTop = (element as HTMLElement).offsetTop - 100; // 100px buffer from top
-          window.scrollTo({ 
-            top: offsetTop, 
-            behavior: 'smooth' 
+          // Position to align with arrow detection logic - header near top, cards partially visible
+          const elementTop = (element as HTMLElement).offsetTop;
+          const offsetPosition = elementTop - 50; // Position header 50px from top
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
           });
+          
+          // Dispatch event to show arrow after navigation
+          setTimeout(() => {
+            console.log('Navigation: Dispatching programsNavigated event');
+            const event = new CustomEvent('programsNavigated');
+            window.dispatchEvent(event);
+          }, 500); // Delay to allow scroll to complete
         } else if (href === '#aboutme') {
           element.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {

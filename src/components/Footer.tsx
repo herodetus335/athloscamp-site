@@ -42,8 +42,24 @@ const Footer = () => {
                   className="text-gray-300 hover:text-orange-500 transition-colors duration-200"
                   onClick={e => {
                     e.preventDefault();
-                    const el = document.querySelector('#programs');
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    const el = document.querySelector('#programs') as HTMLElement;
+                    if (el) {
+                      // Position to align with arrow detection logic - header near top, cards partially visible
+                      const elementTop = el.offsetTop;
+                      const offsetPosition = elementTop - 50; // Position header 50px from top
+                      
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                      });
+                      
+                      // Dispatch event to show arrow after navigation
+                      setTimeout(() => {
+                        console.log('Footer: Dispatching programsNavigated event');
+                        const event = new CustomEvent('programsNavigated');
+                        window.dispatchEvent(event);
+                      }, 500); // Delay to allow scroll to complete
+                    }
                   }}
                 >
                   Programs
