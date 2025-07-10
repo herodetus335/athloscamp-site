@@ -40,9 +40,9 @@ const Hero = () => {
       />
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-blue-800/70 to-orange-600/60" />
       
-      <div className="absolute bottom-0 left-0 right-0 h-32 md:h-40 bg-gradient-to-t from-blue-900/90 via-blue-800/80 via-blue-700/60 via-blue-600/40 via-blue-500/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 md:h-40 bg-gradient-to-t from-red-900/90 via-blue-800/80 via-blue-700/60 via-blue-600/40 via-blue-500/20 to-transparent" />
       
-      <div className="relative z-10 text-white max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-20">
+      <div className="relative z-10 text-white max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-20">
         <div className="animate-fade-in-up text-center">
           <h1 className="text-5xl md:text-7xl font-bold text-center mb-6 leading-tight">
             5 Days to a Fitter, <span className="btn-orange">Happier</span> Kid

@@ -35,27 +35,103 @@ const locationCardImages = [
 const LocationCardCarousel = () => {
   const [index, setIndex] = useState(0);
   const [enlarged, setEnlarged] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  
   const prev = () => setIndex(i => (i === 0 ? locationCardImages.length - 1 : i - 1));
   const next = () => setIndex(i => (i === locationCardImages.length - 1 ? 0 : i + 1));
   const img = locationCardImages[index];
+  
   return (
-    <div className="md:w-1/2 w-full h-64 md:h-auto relative flex items-center justify-center" style={{background: '#eee'}}>
-      <button onClick={prev} className="absolute left-0 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300" style={{ borderRadius: 0, top: '50%', transform: 'translateY(-50%)' }} aria-label="Previous">
-        <svg width="32" height="32" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
-      </button>
-      {/* On mobile, make image clickable to enlarge */}
-      <img 
-        src={img.src} 
-        alt={img.alt} 
-        className="object-cover w-full h-full md:cursor-default cursor-pointer" 
-        style={{borderRadius: 0, boxShadow: 'none'}} 
-        onClick={() => {
-          if (window.innerWidth < 768) setEnlarged(true);
-        }}
-      />
-      <button onClick={next} className="absolute right-0 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300" style={{ borderRadius: 0, top: '50%', transform: 'translateY(-50%)' }} aria-label="Next">
-        <svg width="32" height="32" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-      </button>
+    <div className="md:w-1/2 w-full h-64 md:h-auto relative" style={{background: '#eee'}}>
+      {/* Main image container */}
+      <div className="relative w-full h-full md:h-auto flex items-center justify-center">
+        {/* Subtle edge indicators - mobile only */}
+        <div className="md:hidden">
+          {index > 0 && (
+            <div className="absolute left-1 top-1/2 transform -translate-y-1/2 z-20 bg-gradient-to-r from-black/30 to-transparent w-6 h-12 rounded-r-lg flex items-center justify-start pl-1">
+              <div className="w-1 h-6 bg-white/80 rounded-full"></div>
+            </div>
+          )}
+          {index < locationCardImages.length - 1 && (
+            <div className="absolute right-1 top-1/2 transform -translate-y-1/2 z-20 bg-gradient-to-l from-black/30 to-transparent w-6 h-12 rounded-l-lg flex items-center justify-end pr-1">
+              <div className="w-1 h-6 bg-white/80 rounded-full"></div>
+            </div>
+          )}
+        </div>
+
+        {/* Desktop arrows - hidden on mobile */}
+        <button onClick={prev} className="hidden md:block absolute left-0 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300" style={{ borderRadius: 0, top: '50%', transform: 'translateY(-50%)' }} aria-label="Previous">
+          <svg width="32" height="32" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        
+        {/* Touch-enabled image container */}
+        <div 
+          className="w-full h-full md:touch-pan-y touch-pan-x"
+          onTouchStart={(e) => {
+            if (window.innerWidth < 768) {
+              const touch = e.touches[0];
+              setTouchStart(touch.clientX);
+            }
+          }}
+          onTouchMove={(e) => {
+            if (window.innerWidth < 768 && touchStart) {
+              const touch = e.touches[0];
+              setTouchEnd(touch.clientX);
+            }
+          }}
+          onTouchEnd={() => {
+            if (window.innerWidth < 768 && touchStart && touchEnd) {
+              const distance = touchStart - touchEnd;
+              const isSignificantSwipe = Math.abs(distance) > 50;
+              
+              if (isSignificantSwipe) {
+                if (distance > 0) {
+                  // Swiped left - go to next
+                  next();
+                } else {
+                  // Swiped right - go to previous  
+                  prev();
+                }
+              }
+              setTouchStart(null);
+              setTouchEnd(null);
+            }
+          }}
+        >
+          {/* On mobile, make image clickable to enlarge */}
+          <img 
+            src={img.src} 
+            alt={img.alt} 
+            className="object-cover w-full h-full md:cursor-default cursor-pointer" 
+            style={{borderRadius: 0, boxShadow: 'none'}} 
+            onClick={() => {
+              if (window.innerWidth < 768) setEnlarged(true);
+            }}
+          />
+        </div>
+
+        <button onClick={next} className="hidden md:block absolute right-0 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300" style={{ borderRadius: 0, top: '50%', transform: 'translateY(-50%)' }} aria-label="Next">
+          <svg width="32" height="32" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      {/* Mobile dot indicators - positioned absolutely */}
+      <div className="md:hidden absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
+        {locationCardImages.map((_, imgIndex) => (
+          <button
+            key={imgIndex}
+            onClick={() => setIndex(imgIndex)}
+            className={`w-2 h-2 rounded-full transition-all duration-200 ${
+              imgIndex === index 
+                ? 'bg-orange-400 w-6' 
+                : 'bg-white/70 hover:bg-white/90'
+            }`}
+            aria-label={`Go to image ${imgIndex + 1}`}
+          />
+        ))}
+      </div>
+
       {/* Modal for enlarged image on mobile */}
       {enlarged && (
         <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center md:hidden" onClick={() => setEnlarged(false)}>
@@ -101,6 +177,8 @@ const About = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
   
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => 
@@ -142,15 +220,48 @@ const About = () => {
 
         {/* Mobile Carousel */}
         <div className="md:hidden relative">
-          <button 
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300 rounded-full"
-            aria-label="Previous"
-          >
-            <svg width="24" height="24" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
-          </button>
+          {/* Subtle edge indicators */}
+          {currentIndex > 0 && (
+            <div className="absolute left-1 top-1/2 transform -translate-y-1/2 z-20 bg-gradient-to-r from-black/20 to-transparent w-8 h-16 rounded-r-lg flex items-center justify-start pl-1">
+              <div className="w-1 h-8 bg-white/60 rounded-full"></div>
+            </div>
+          )}
+          {currentIndex < benefits.length - 1 && (
+            <div className="absolute right-1 top-1/2 transform -translate-y-1/2 z-20 bg-gradient-to-l from-black/20 to-transparent w-8 h-16 rounded-l-lg flex items-center justify-end pr-1">
+              <div className="w-1 h-8 bg-white/60 rounded-full"></div>
+            </div>
+          )}
           
-          <div className="overflow-hidden">
+          {/* Touch-enabled carousel container */}
+          <div 
+            className="overflow-hidden touch-pan-x"
+            onTouchStart={(e) => {
+              const touch = e.touches[0];
+              setTouchStart(touch.clientX);
+            }}
+            onTouchMove={(e) => {
+              if (!touchStart) return;
+              const touch = e.touches[0];
+              setTouchEnd(touch.clientX);
+            }}
+            onTouchEnd={() => {
+              if (!touchStart || !touchEnd) return;
+              const distance = touchStart - touchEnd;
+              const isSignificantSwipe = Math.abs(distance) > 50;
+              
+              if (isSignificantSwipe) {
+                if (distance > 0) {
+                  // Swiped left - go to next
+                  nextSlide();
+                } else {
+                  // Swiped right - go to previous  
+                  prevSlide();
+                }
+              }
+              setTouchStart(null);
+              setTouchEnd(null);
+            }}
+          >
             <div className="flex transition-transform duration-300" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
               {benefits.map((benefit, index) => (
                 <div key={index} className="w-full flex-shrink-0 px-4">
@@ -170,13 +281,21 @@ const About = () => {
             </div>
           </div>
           
-          <button 
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300 rounded-full"
-            aria-label="Next"
-          >
-            <svg width="24" height="24" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-          </button>
+          {/* Dot indicators */}
+          <div className="flex justify-center mt-4 space-x-2">
+            {benefits.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                  index === currentIndex 
+                    ? 'bg-orange-400 w-6' 
+                    : 'bg-white/40 hover:bg-white/60'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Desktop Layout */}
@@ -224,7 +343,7 @@ const About = () => {
 
       {/* Location Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-0 pt-20 md:pt-32 pb-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-6">Camp Location</h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-6 mt-4 md:mt-0">Camp Location</h2>
         <div className="flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden">
           {/* Left: Pavilion Image Carousel */}
           <LocationCardCarousel />
