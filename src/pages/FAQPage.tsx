@@ -65,7 +65,7 @@ const FAQPage = () => {
         },
         {
           question: "What are your 2025 camp dates and hours?",
-          answer: "July 21–25, 2025\nHalf-Day: 9 AM–1 PM | Full-Day: 9 AM–5 PM"
+          answer: "The camp is divided up by 3 Blocks, each Block being 5 consecutive days (no weekends), in total, spanning from July 21st to August 8th. The hours for the Part-Time camp are 9:00am to 1:00pm daily -- and the hours for Full-Time are 9:00am to 5:00pm daily."
         },
         {
           question: "What is the maximum group size?",
@@ -78,7 +78,7 @@ const FAQPage = () => {
       questions: [
         {
           question: "What activities do you offer?",
-          answer: "Team games (soccer, kickball), obstacle courses, skill stations (agility ladders, medicine balls), arts & crafts, and relay challenges—no swimming."
+          answer: "Beginner/intermediate strength, endurance, and form training; team games (soccer, kickball), obstacle courses, skill stations (agility ladders, medicine balls), arts & crafts, STEM projects, outdoor exploration, team building challenges, and relay challenges."
         },
         {
           question: "What should my child bring?",
@@ -86,7 +86,7 @@ const FAQPage = () => {
         },
         {
           question: "What happens if it rains?",
-          answer: "We relocate to our covered pavilion and multipurpose room (no indoor track), and continue all planned activities rain or shine."
+          answer: "We relocate to our covered pavilion and multipurpose room, and continue all planned activities rain or shine."
         }
       ]
     },
@@ -95,7 +95,7 @@ const FAQPage = () => {
       questions: [
         {
           question: "How much does camp cost?",
-          answer: "Half-Day (9 AM–1 PM): $225\nFull-Day (9 AM–5 PM): $315\nSibling discount: 10% off each additional child"
+          answer: "Half-Day (9:00 AM–1:00 PM): $225\nFull-Day (9:00 AM–5:00 PM): $315\nSibling discount: 10% off each additional child"
         },
         {
           question: "What's included in the fee?",
