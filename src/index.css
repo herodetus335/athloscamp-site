@@ -45,6 +45,16 @@ body {
   background: #ea580c;
 }
 
+/* Hide scrollbar for gallery carousel */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
 /* Mobile Overrides - Only apply on screens up to 768px */
 @media screen and (max-width: 768px) {
   /* Prevent horizontal scrolling */
@@ -309,40 +319,57 @@ body {
     padding: 0.875rem 1.5rem;
   }
   
-  /* 1) Ensure the wrapper is full-width and centers its children */
-  .hero .stats {
-    display: flex !important;
+  /* 1) Update grid layout to fit properly on SE */
+  .hero .stats-mobile {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
     width: 100% !important;
-    justify-content: center !important;
+    max-width: 300px !important;    /* Constrain to fit SE screen */
     padding: 0 0.5rem !important;   /* 8px gutters each side */
-    gap: 4px !important;            /* 4px between cards */
+    gap: 0.25rem !important;        /* 4px between cards */
     margin: 0 auto !important;
   }
 
-  /* 2) Size cards to ~28% each, with tiny side margins */
+  /* 2) Size cards to fit in the constrained grid */
   .hero .stat {
-    flex: 0 1 28% !important;       /* roughly three across with room */
-    max-width: 28% !important;
     margin: 0 !important;           /* gap handled by container's gap */
-    padding: 0.3rem 0.5rem !important;   /* less top/bottom space */
+    padding: 0.4rem 0.3rem !important;   /* compact padding */
     white-space: normal !important;       /* allow proper line breaks */
-    line-height: 1.3 !important;          /* improve readability */
+    line-height: 1.2 !important;          /* improve readability */
     backdrop-filter: blur(8px) !important;
     background: rgba(255,255,255,0.15) !important;
-    border-radius: 12px !important;
+    border-radius: 8px !important;        /* smaller border radius */
     box-sizing: border-box !important;
     opacity: 1 !important;
-    max-height: 6.5rem !important;       /* adjust until they look right */
-    overflow: hidden !important;         /* hide any extra content */
+    min-height: 5.5rem !important;        /* ensure consistent height */
+    overflow: hidden !important;          /* hide any extra content */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   /* 3) Shrink line-height and font-size inside the cards */
   .hero .stat p,
   .hero .stat .text-lg,
-  .hero .stat .text-sm {
-    font-size: 0.8rem !important;        /* smaller text */
-    line-height: 1.2 !important;         /* tighter lines */
-    margin-bottom: 0.2rem !important;    /* less gap below each line */
+  .hero .stat .text-sm,
+  .hero .stat div {
+    font-size: 0.7rem !important;        /* very small text for SE */
+    line-height: 1.1 !important;         /* tighter lines */
+    margin-bottom: 0.1rem !important;    /* minimal gap below each line */
+  }
+
+  /* Target the specific text elements in our cards */
+  .hero .stat .text-sm,
+  .hero .stat .text-xs {
+    font-size: 0.65rem !important;       /* even smaller for subtitle text */
+  }
+
+  /* Icon sizing for SE */
+  .hero .stat .h-5,
+  .hero .stat .w-5 {
+    height: 1rem !important;
+    width: 1rem !important;
   }
 }
 
@@ -356,19 +383,19 @@ body {
 /* Larger phones (376px-640px) - Hero section adjustments */
 @media (min-width: 376px) and (max-width: 640px) {
   /* Center the cards container */
-  .hero .stats {
-    display: flex !important;
-    justify-content: center !important;
+  .hero .stats-mobile {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
     margin: 0 auto !important;
     padding: 0 0.5rem !important;   /* 8px gutters each side */
-    gap: 4px !important;            /* 4px between cards */
+    gap: 0.5rem !important;         /* slightly larger gap than SE */
     width: 100% !important;
+    max-width: 90vw !important;     /* responsive max width */
   }
 
   /* Apply SE card styling but larger */
   .hero .stat {
-    flex: 0 1 calc((100% - 2 * 8px) / 3) !important;
-    margin: 0 0.125rem !important;
+    margin: 0 !important;
     padding: 0.5rem 0.75rem !important;   /* slightly larger than SE */
     white-space: normal !important;
     line-height: 1.3 !important;
@@ -377,17 +404,35 @@ body {
     border-radius: 12px !important;
     box-sizing: border-box !important;
     opacity: 1 !important;
-    max-height: 8rem !important;       /* larger than SE's 6.5rem */
+    min-height: 6.5rem !important;        /* consistent height, larger than SE */
     overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   /* Larger text styling than SE */
   .hero .stat p,
   .hero .stat .text-lg,
-  .hero .stat .text-sm {
-    font-size: 0.9rem !important;        /* larger than SE's 0.8rem */
+  .hero .stat .text-sm,
+  .hero .stat div {
+    font-size: 0.8rem !important;        /* readable size for larger phones */
     line-height: 1.2 !important;
     margin-bottom: 0.2rem !important;
+  }
+
+  /* Target the specific text elements in our cards */
+  .hero .stat .text-sm,
+  .hero .stat .text-xs {
+    font-size: 0.75rem !important;       /* subtitle text */
+  }
+
+  /* Icon sizing for larger mobile */
+  .hero .stat .h-5,
+  .hero .stat .w-5 {
+    height: 1.25rem !important;
+    width: 1.25rem !important;
   }
 
   /* Center the subheader text */
@@ -1016,4 +1061,37 @@ body {
     .offering-card {
         padding: 2rem;
     }
+}
+
+@media (min-width: 1024px) {
+  .offerings-container {
+    grid-template-columns: repeat(2, minmax(600px, 1fr));
+    gap: 2.5rem;
+    max-width: 1400px;
+    padding: 0 1rem;
+  }
+  .offering-card {
+    padding: 1rem 3rem 1rem 3rem;
+    min-height: 280px;
+    max-width: 700px;
+    margin: 0 auto;
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+  }
+  .card-header {
+    margin-bottom: 0.75rem;
+  }
+  .time-info {
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+  }
+  .features-list {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .cta-button {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+  }
 }

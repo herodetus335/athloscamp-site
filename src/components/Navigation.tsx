@@ -40,7 +40,14 @@ const Navigation = () => {
     if (isHomePage) {
       const element = document.querySelector(href);
       if (element) {
-        if (href === '#programs' || href === '#aboutme') {
+        if (href === '#programs') {
+          // For programs, scroll to show the full offerings section without cutting off
+          const offsetTop = (element as HTMLElement).offsetTop - 100; // 100px buffer from top
+          window.scrollTo({ 
+            top: offsetTop, 
+            behavior: 'smooth' 
+          });
+        } else if (href === '#aboutme') {
           element.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
           element.scrollIntoView({ behavior: 'smooth' });

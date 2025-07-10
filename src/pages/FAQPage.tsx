@@ -78,7 +78,7 @@ const FAQPage = () => {
       questions: [
         {
           question: "What activities do you offer?",
-          answer: "Beginner/intermediate strength, endurance, and form training; team games (soccer, kickball), obstacle courses, skill stations (agility ladders, medicine balls), arts & crafts, STEM projects, outdoor exploration, team building challenges, and relay challenges."
+          answer: "Team games (soccer, kickball), obstacle courses, skill stations (agility ladders, medicine balls), arts & crafts, and relay challenges—no swimming."
         },
         {
           question: "What should my child bring?",
@@ -95,7 +95,7 @@ const FAQPage = () => {
       questions: [
         {
           question: "How much does camp cost?",
-          answer: "Half-Day (9 AM–1 PM): $250\nFull-Day (9 AM–5 PM): $350\nSibling discount: 10% off each additional child"
+          answer: "Half-Day (9 AM–1 PM): $225\nFull-Day (9 AM–5 PM): $315\nSibling discount: 10% off each additional child"
         },
         {
           question: "What's included in the fee?",
@@ -181,8 +181,59 @@ const FAQPage = () => {
             Our friendly staff is here to help! Contact us directly for personalized assistance.
           </p>
           <div className="flex flex-col items-center gap-2 justify-center">
-            <div className="text-lg text-gray-900 font-semibold">Email: athlosfitnesscamp@gmail.com</div>
-            <div className="text-lg text-gray-900 font-semibold">Phone: 703-865-1675</div>
+            <div className="text-lg text-gray-900 font-semibold">Email: 
+              <button 
+                onClick={() => {
+                  const email = 'athlosfitnesscamp@gmail.com';
+                  
+                  // Try mailto first
+                  window.location.href = `mailto:${email}`;
+                  
+                  // Copy to clipboard with fallback methods
+                  const copyToClipboard = async (text: string) => {
+                    try {
+                      // Method 1: Modern clipboard API
+                      if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(text);
+                        return true;
+                      }
+                      
+                      // Method 2: Fallback using textarea
+                      const textarea = document.createElement('textarea');
+                      textarea.value = text;
+                      textarea.style.position = 'fixed';
+                      textarea.style.opacity = '0';
+                      document.body.appendChild(textarea);
+                      textarea.select();
+                      document.execCommand('copy');
+                      document.body.removeChild(textarea);
+                      return true;
+                    } catch (err) {
+                      console.error('Failed to copy:', err);
+                      return false;
+                    }
+                  };
+                  
+                  copyToClipboard(email).then(success => {
+                    if (success) {
+                      // Show temporary notification
+                      const notification = document.createElement('div');
+                      notification.textContent = 'Email copied to clipboard!';
+                      notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-opacity duration-300';
+                      document.body.appendChild(notification);
+                      setTimeout(() => {
+                        notification.style.opacity = '0';
+                        setTimeout(() => notification.remove(), 300);
+                      }, 2000);
+                    }
+                  });
+                }}
+                className="text-orange-500 hover:text-orange-600 transition-colors duration-200 bg-transparent border-none p-0 m-0 font-inherit cursor-pointer"
+              >
+                athlosfitnesscamp@gmail.com
+              </button>
+            </div>
+            <div className="text-lg text-gray-900 font-semibold">Phone: <a href="tel:703-865-1675" className="text-orange-500 hover:text-orange-600 transition-colors duration-200">703-865-1675</a></div>
           </div>
         </div>
       </section>

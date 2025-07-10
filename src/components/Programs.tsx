@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Clock, Users2, CheckCircle, Calendar, DollarSign, ChevronDown, ChevronUp } from 'lucide-react';
+import { Clock, Users2, CheckCircle, Calendar, DollarSign, ChevronDown, ChevronUp, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Programs = () => {
@@ -18,16 +18,16 @@ const Programs = () => {
     {
       type: "Half-Day",
       schedule: "9:00 AM - 1:00 PM daily",
-      price: "$250",
+      price: "$225",
       description: "Focused fitness training and skill development",
       afternoonActivities: null
     },
     {
       type: "Full-Day",
       schedule: "9:00 AM - 5:00 PM daily",
-      price: "$350",
+      price: "$315",
       description: "Complete day experience including fitness training and afternoon arts & crafts activities",
-      afternoonActivities: "1:00 PM - 5:00 PM: Arts & crafts and non-fitness activities"
+      afternoonActivities: "1:00 PM - 5:00 PM: Arts & crafts and Non-Fitness Activities"
     }
   ];
 
@@ -64,6 +64,20 @@ const Programs = () => {
     }
   ];
 
+  const handleProgramSelection = (programType: string) => {
+    // Dispatch custom event to notify Contact component
+    const event = new CustomEvent('selectProgram', {
+      detail: { program: programType }
+    });
+    window.dispatchEvent(event);
+    
+    // Scroll to contact section
+    const element = document.querySelector('#contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="programs" className="pt-4 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,32 +97,43 @@ const Programs = () => {
           </div>
         </div>
 
+        {/* 3 Camp Blocks Row - Compact, before quick facts */}
+        <div className="hidden md:flex flex-row justify-center items-center gap-6 mb-8">
+          <div className="flex flex-col items-center bg-gradient-to-br from-blue-800/80 to-orange-400/80 rounded-2xl shadow-2xl px-16 py-4 min-w-[200px]">
+            <Calendar className="h-8 w-8 text-orange-200 mb-2" strokeWidth={2.5} />
+            <span className="text-lg font-bold text-orange-100">BLOCK 1</span>
+            <span className="text-base text-white font-semibold">July 21 - 25</span>
+          </div>
+          <div className="flex flex-col items-center bg-gradient-to-br from-blue-800/80 to-orange-400/80 rounded-2xl shadow-2xl px-16 py-4 min-w-[200px]">
+            <Calendar className="h-8 w-8 text-orange-200 mb-2" strokeWidth={2.5} />
+            <span className="text-lg font-bold text-orange-100">BLOCK 2</span>
+            <span className="text-base text-white font-semibold">July 28 - Aug 01</span>
+          </div>
+          <div className="flex flex-col items-center bg-gradient-to-br from-blue-800/80 to-orange-400/80 rounded-2xl shadow-2xl px-16 py-4 min-w-[200px]">
+            <Calendar className="h-8 w-8 text-orange-200 mb-2" strokeWidth={2.5} />
+            <span className="text-lg font-bold text-orange-100">BLOCK 3</span>
+            <span className="text-base text-white font-semibold">Aug 04 - 08</span>
+          </div>
+        </div>
+
         {/* Desktop Version - Hidden on mobile */}
         <div className="hidden md:block">
           {/* Our Offerings Gradient Quick Facts Strip - Larger */}
-          <div className="bg-gradient-to-r from-blue-600 to-orange-500 rounded-xl flex justify-center items-center max-w-6xl mx-auto shadow-lg px-6 py-6">
-            <div className="flex items-center space-x-2 mx-6">
-              <Calendar className="w-5 h-5 text-white" />
-              <span className="font-semibold text-white text-base">{commonDetails.dates}</span>
-            </div>
-            <div className="flex items-center space-x-2 mx-6">
-              <Users2 className="w-5 h-5 text-white" />
-              <span className="font-semibold text-white text-base">Ages {commonDetails.ageRange}</span>
-            </div>
-            <div className="flex items-center space-x-2 mx-6">
-              <Users2 className="w-5 h-5 text-white" />
-              <div className="flex flex-col mt-1">
-                <span className="font-semibold text-white text-base leading-tight">15 kids per group</span>
-                <span className="text-xs text-white/80 leading-tight">(1 coach per group)</span>
+          <div className="flex justify-center mt-8 mb-5">
+            <div className="bg-gradient-to-br from-blue-800 via-orange-400 to-orange-500 rounded-full shadow-lg px-12 py-3 flex flex-row items-center justify-center gap-12 relative text-lg text-center" style={{ minWidth: '420px', fontWeight: 600 }}>
+              <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-900 text-white text-[10px] px-2 py-0.5 rounded-full font-semibold tracking-wide shadow-sm">Per Block</span>
+              <div className="flex items-center gap-3">
+                <CheckCircle className="w-6 h-6 text-white" />
+                <span className="font-semibold text-white text-sm">{commonDetails.capacity}</span>
               </div>
-            </div>
-            <div className="flex items-center space-x-2 mx-6">
-              <CheckCircle className="w-5 h-5 text-white" />
-              <span className="font-semibold text-white text-base">{commonDetails.capacity}</span>
+              <div className="flex items-center gap-3">
+                <Users2 className="w-6 h-6 text-white" />
+                <span className="font-semibold text-white text-sm">15/group</span>
+              </div>
             </div>
           </div>
           {/* Experience Cards - Redesigned */}
-          <div className="offerings-container">
+          <div id="offerings-cards" className="offerings-container">
             {/* Half-Day Card */}
             <div className="offering-card half-day-card">
               <div className="card-header">
@@ -116,7 +141,18 @@ const Programs = () => {
                   <h3 className="card-title">Half-Day Experience</h3>
                   <p className="card-description">Focused fitness training & skill development</p>
                 </div>
-                <div className="price-badge">$250</div>
+                <div className="price-badge">
+                  <div className="text-sm text-red-200 line-through opacity-75">$250</div>
+                  <div className="text-2xl font-bold">$225</div>
+                  <div className="text-xs text-green-200 font-semibold mt-1">Save $25!</div>
+                </div>
+              </div>
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <Users2 className="w-6 h-6 text-blue-700" />
+                <span className="text-sm font-semibold text-blue-700">Ages {commonDetails.ageRange}</span>
+                <span className="mx-1 text-blue-400">|</span>
+                <Award className="w-5 h-5 text-blue-700" />
+                <span className="text-sm font-semibold text-blue-700">All Skill Levels</span>
               </div>
               <div className="time-info">
                 <svg className="time-icon" fill="currentColor" viewBox="0 0 20 20">
@@ -150,7 +186,9 @@ const Programs = () => {
                   <span className="feature-text">...and much more!</span>
                 </li>
               </ul>
-              <button className="cta-button" onClick={() => window.location.href = '/#contact'}>Choose Half-Day</button>
+              <button className="bg-orange-500 text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-orange-600 transition-all duration-300 w-full shadow-lg hover:shadow-xl" onClick={() => handleProgramSelection('half-day')}>
+                Register Now - Save 10%
+              </button>
             </div>
             {/* Full-Day Card */}
             <div className="offering-card full-day-card">
@@ -159,7 +197,18 @@ const Programs = () => {
                   <h3 className="card-title">Full-Day Experience</h3>
                   <p className="card-description">Fitness training + afternoon arts & crafts</p>
                 </div>
-                <div className="price-badge">$350</div>
+                <div className="price-badge">
+                  <div className="text-sm text-red-200 line-through opacity-75">$350</div>
+                  <div className="text-2xl font-bold">$315</div>
+                  <div className="text-xs text-green-200 font-semibold mt-1">Save $35!</div>
+                </div>
+              </div>
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <Users2 className="w-6 h-6 text-blue-700" />
+                <span className="text-sm font-semibold text-blue-700">Ages {commonDetails.ageRange}</span>
+                <span className="mx-1 text-blue-400">|</span>
+                <Award className="w-5 h-5 text-blue-700" />
+                <span className="text-sm font-semibold text-blue-700">All Skill Levels</span>
               </div>
               <div className="time-info">
                 <svg className="time-icon" fill="currentColor" viewBox="0 0 20 20">
@@ -193,38 +242,35 @@ const Programs = () => {
                   <span className="feature-text">...and much more!</span>
                 </li>
               </ul>
-              <button className="cta-button" onClick={() => window.location.href = '/#contact'}>Choose Full-Day</button>
+              <button className="bg-orange-500 text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-orange-600 transition-all duration-300 w-full shadow-lg hover:shadow-xl" onClick={() => handleProgramSelection('full-day')}>
+                Register Now - Save 10%
+              </button>
             </div>
           </div>
         </div>
 
         {/* Mobile Version - Hidden on desktop */}
         <div className="md:hidden">
-          {/* Centered Our Offerings Gradient Quick Facts Strip - Mobile, 4 sections */}
-          <div className="flex justify-center">
-            <div className="bg-gradient-to-r from-blue-600 to-orange-500 rounded-xl grid grid-cols-2 gap-y-2 max-w-sm w-full mx-auto shadow-lg px-2 py-4 mb-6">
-              <div className="flex flex-col items-center justify-center py-2 border-b border-white/20 border-r">
-                <Calendar className="w-6 h-6 text-white mb-1" />
-                <span className="font-semibold text-white text-xs text-center">{commonDetails.dates}</span>
-              </div>
-              <div className="flex flex-col items-center justify-center py-2 border-b border-white/20">
-                <Users2 className="w-6 h-6 text-white mb-1" />
-                <span className="font-semibold text-white text-xs text-center">Ages {commonDetails.ageRange}</span>
-              </div>
-              <div className="flex flex-col items-center justify-center py-2 border-r">
-                <Users2 className="w-6 h-6 text-white mb-1" />
-                <div className="flex flex-col mt-1">
-                  <span className="font-semibold text-white text-xs text-center leading-tight">15 kids per group</span>
-                  <span className="text-[11px] text-white/80 text-center leading-tight">(1 coach per group)</span>
-                </div>
-              </div>
-              <div className="flex flex-col items-center justify-center py-2">
-                <CheckCircle className="w-6 h-6 text-white mb-1" />
-                <span className="font-semibold text-white text-xs text-center">{commonDetails.capacity}</span>
-              </div>
+          {/* Block Dates Row - Text with Icon */}
+          <div className="flex justify-center gap-3 mb-6">
+            <div className="flex flex-col items-center bg-gradient-to-br from-blue-800/80 to-orange-400/80 rounded-2xl shadow-lg px-5 py-4 min-w-[100px]">
+              <Calendar className="h-7 w-7 text-orange-200 mb-1.5" strokeWidth={2.5} />
+              <span className="text-sm font-bold text-orange-100">BLOCK 1</span>
+              <span className="text-xs text-white font-semibold">July 21 - 25</span>
+            </div>
+            <div className="flex flex-col items-center bg-gradient-to-br from-blue-800/80 to-orange-400/80 rounded-2xl shadow-lg px-5 py-4 min-w-[100px]">
+              <Calendar className="h-7 w-7 text-orange-200 mb-1.5" strokeWidth={2.5} />
+              <span className="text-sm font-bold text-orange-100">BLOCK 2</span>
+              <span className="text-xs text-white font-semibold">July 28 - Aug 01</span>
+            </div>
+            <div className="flex flex-col items-center bg-gradient-to-br from-blue-800/80 to-orange-400/80 rounded-2xl shadow-lg px-5 py-4 min-w-[100px]">
+              <Calendar className="h-7 w-7 text-orange-200 mb-1.5" strokeWidth={2.5} />
+              <span className="text-sm font-bold text-orange-100">BLOCK 3</span>
+              <span className="text-xs text-white font-semibold">Aug 04 - 08</span>
             </div>
           </div>
-          {/* Mobile Program Tabs */}
+
+          {/* Mobile Program Tabs - Revert to previous detailed format */}
           <div className="mb-6">
             {/* Tab Buttons */}
             <div className="flex bg-gray-100 rounded-lg p-1 mb-4">
@@ -249,7 +295,7 @@ const Programs = () => {
                 Full-Day
               </button>
             </div>
-            {/* Tab Content */}
+            {/* Tab Content - Detailed Cards */}
             {programs.map((program, index) => {
               const isActive = (program.type === 'Half-Day' && activeTab === 'half-day') || 
                               (program.type === 'Full-Day' && activeTab === 'full-day');
@@ -258,43 +304,64 @@ const Programs = () => {
                 <div key={index} className="bg-white rounded-xl p-6 shadow-lg">
                   <div className="text-center">
                     <h3 className="text-xl font-bold text-gray-900 mb-3">{program.type} Experience</h3>
-                    <div className="flex items-center justify-center space-x-4 mb-3">
+                    <div className="flex flex-col items-center space-y-3 mb-3">
                       <div className="flex items-center space-x-2">
                         <Clock className="h-4 w-4 text-orange-500" />
                         <span className="font-semibold text-sm text-gray-700">{program.schedule}</span>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <DollarSign className="h-4 w-4 text-green-500" />
-                        <span className="font-bold text-xl text-green-600">{program.price}</span>
+                      <div className="flex flex-col items-center">
+                        <span className="text-sm text-red-500 line-through opacity-75">
+                          {program.type === 'Half-Day' ? '$250' : '$350'}
+                        </span>
+                        <div className="flex items-center space-x-1">
+                          <DollarSign className="h-5 w-5 text-green-500" />
+                          <span className="font-bold text-2xl text-green-600">{program.price}</span>
+                        </div>
+                        <div className="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-semibold mt-1">
+                          Save ${program.type === 'Half-Day' ? '25' : '35'}!
+                        </div>
                       </div>
                     </div>
                     <p className="text-gray-600 text-sm mb-3">{program.description}</p>
+                    <div className="flex items-center justify-center gap-1 mb-3">
+                      <Users2 className="w-5 h-5 text-blue-700" />
+                      <span className="text-xs font-semibold text-blue-700">Ages {commonDetails.ageRange}</span>
+                      <span className="mx-1 text-blue-400">|</span>
+                      <Award className="w-4 h-4 text-blue-700" />
+                      <span className="text-xs font-semibold text-blue-700">All Skill Levels</span>
+                    </div>
                     {program.afternoonActivities && (
                       <div className="bg-orange-50 border border-orange-200 rounded-lg p-2 mb-3">
                         <p className="text-xs text-orange-800 font-medium">{program.afternoonActivities}</p>
                       </div>
                     )}
-                    {/* Inline Early Bird Offer */}
-                    <div className="bg-orange-50 border border-orange-200 rounded-lg p-2 mb-4">
-                      <p className="text-xs text-orange-800 font-medium">
-                        🐦 Early Bird: Save 10% if you register by July 14th
-                      </p>
-                    </div>
                     <button 
                       onClick={() => {
-                        const element = document.querySelector('#contact');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth' });
-                        }
+                        handleProgramSelection(program.type === 'Half-Day' ? 'half-day' : 'full-day');
                       }}
                       className="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-all duration-300 w-full"
                     >
-                      Register Now
+                      Register Now – Save 10%
                     </button>
                   </div>
                 </div>
               );
             })}
+          </div>
+
+          {/* Sleek Quick Facts Panel */}
+          <div className="flex justify-center mt-8 mb-5">
+            <div className="bg-gradient-to-br from-blue-800/90 via-blue-600/80 to-orange-400/80 rounded-full shadow px-5 py-2 flex flex-row items-center gap-6 relative">
+              <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-900 text-white text-[10px] px-2 py-0.5 rounded-full font-semibold tracking-wide shadow-sm">Per Block</span>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-6 h-6 text-white" />
+                <span className="font-semibold text-white text-sm">{commonDetails.capacity}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users2 className="w-6 h-6 text-white" />
+                <span className="font-semibold text-white text-sm">15/group</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

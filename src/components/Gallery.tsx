@@ -46,18 +46,14 @@ const Gallery = () => {
     });
   };
 
-  // Touch/swipe support
+  // Touch/swipe support for mobile scrollable gallery
   const touchStartX = useRef<number | null>(null);
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const delta = e.changedTouches[0].clientX - touchStartX.current;
-    if (Math.abs(delta) > 50) {
-      if (delta > 0) scrollBy(-1);
-      else scrollBy(1);
-    }
+    // Let the natural scroll behavior handle the touch scrolling
+    // This allows users to stop at any point during the scroll
     touchStartX.current = null;
   };
 
@@ -68,14 +64,11 @@ const Gallery = () => {
     return (
       <div
         key={i}
-        className="carousel-thumb cursor-pointer flex-shrink-0"
+        className="carousel-thumb cursor-pointer flex-shrink-0 rounded-xl overflow-hidden shadow-lg"
         style={{ 
           width: `calc(100%/${visibleCount} - 12px)`, 
           height: 320, 
-          marginRight: 12, 
-          borderRadius: 0, 
-          boxShadow: 'none', 
-          overflow: 'hidden' 
+          marginRight: 12
         }}
         onClick={() => setSelectedImage(photo)}
       >
@@ -84,7 +77,6 @@ const Gallery = () => {
           alt={photo.alt}
           loading="lazy"
           className="w-full h-full object-cover transition-transform duration-300"
-          style={{ display: 'block', borderRadius: 0 }}
         />
       </div>
     );
@@ -100,24 +92,30 @@ const Gallery = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center">Gallery</h2>
         </div>
 
-        {/* Mobile 2x2 Carousel Layout */}
+        {/* Mobile Scrollable 2x2 Gallery */}
         <div className="md:hidden">
-          <div className="w-full h-64 relative flex items-center justify-center" style={{background: '#eee'}}>
-            <button 
-              onClick={() => setScrollIndex(Math.max(0, scrollIndex - 1))}
-              disabled={scrollIndex === 0}
-              className="absolute left-0 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300 disabled:opacity-40" 
-              style={{ borderRadius: 0, top: '50%', transform: 'translateY(-50%)' }} 
-              aria-label="Previous"
+          <div className="w-full h-64 relative">
+            <div 
+              className="flex overflow-x-auto w-full h-full scrollbar-hide"
+              style={{ 
+                scrollBehavior: 'smooth',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none'
+              }}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
             >
-              <svg width="32" height="32" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
-            </button>
-            
-            {/* 2x2 Grid Container */}
+              {/* Create 2x2 grid sections */}
+              {Array.from({ length: Math.ceil(photos.length / 4) }).map((_, deckIndex) => (
+                <div 
+                  key={deckIndex}
+                  className="flex-shrink-0 w-full h-full"
+                  style={{ minWidth: '100%' }}
+                >
             <div className="grid grid-cols-2 gap-1 w-full h-full">
-              {photos.slice(scrollIndex * 4, (scrollIndex + 1) * 4).map((photo, i) => (
+                    {photos.slice(deckIndex * 4, (deckIndex + 1) * 4).map((photo, i) => (
                 <div
-                  key={scrollIndex * 4 + i}
+                        key={deckIndex * 4 + i}
                   className="cursor-pointer overflow-hidden p-1"
                   onClick={() => setSelectedImage(photo)}
                 >
@@ -131,22 +129,16 @@ const Gallery = () => {
                 </div>
               ))}
               {/* Fill empty spaces in the last deck */}
-              {scrollIndex === 2 && Array.from({length: 4 - (photos.length % 4)}).map((_, i) => (
+                    {deckIndex === Math.ceil(photos.length / 4) - 1 && 
+                     Array.from({length: 4 - (photos.length % 4)}).map((_, i) => (
                 <div key={`empty-${i}`} className="bg-gray-100 flex items-center justify-center p-1">
                   <span className="text-gray-400 text-sm">More photos coming soon!</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
-            
-            <button 
-              onClick={() => setScrollIndex(Math.min(2, scrollIndex + 1))}
-              disabled={scrollIndex >= 2}
-              className="absolute right-0 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300 disabled:opacity-40" 
-              style={{ borderRadius: 0, top: '50%', transform: 'translateY(-50%)' }} 
-              aria-label="Next"
-            >
-              <svg width="32" height="32" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-            </button>
           </div>
         </div>
 
@@ -166,8 +158,6 @@ const Gallery = () => {
             <div
               className="flex overflow-hidden w-full"
               ref={carouselRef}
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
               style={{ height: 320 }}
             >
               <div

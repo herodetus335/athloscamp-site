@@ -28,12 +28,13 @@ const LocationCarousel = () => {
 const locationCardImages = [
   { src: "/Pavilion 2 Potomac Green.jpg", alt: "Pavilion 2 Potomac Green" },
   { src: "/sittingareapg.jpg", alt: "Pavilion Sitting Area" },
-  { src: "/pgonmap.jpg", alt: "Potomac Green on Map" },
+  { src: "/pgonmap1.jpg", alt: "Potomac Green on Map" },
   { src: "/pgsign.jpg", alt: "Potomac Green Park Sign" },
 ];
 
 const LocationCardCarousel = () => {
   const [index, setIndex] = useState(0);
+  const [enlarged, setEnlarged] = useState(false);
   const prev = () => setIndex(i => (i === 0 ? locationCardImages.length - 1 : i - 1));
   const next = () => setIndex(i => (i === locationCardImages.length - 1 ? 0 : i + 1));
   const img = locationCardImages[index];
@@ -42,10 +43,30 @@ const LocationCardCarousel = () => {
       <button onClick={prev} className="absolute left-0 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300" style={{ borderRadius: 0, top: '50%', transform: 'translateY(-50%)' }} aria-label="Previous">
         <svg width="32" height="32" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
       </button>
-      <img src={img.src} alt={img.alt} className="object-cover w-full h-full" style={{borderRadius: 0, boxShadow: 'none'}} />
+      {/* On mobile, make image clickable to enlarge */}
+      <img 
+        src={img.src} 
+        alt={img.alt} 
+        className="object-cover w-full h-full md:cursor-default cursor-pointer" 
+        style={{borderRadius: 0, boxShadow: 'none'}} 
+        onClick={() => {
+          if (window.innerWidth < 768) setEnlarged(true);
+        }}
+      />
       <button onClick={next} className="absolute right-0 z-10 bg-white/80 p-2 hover:bg-orange-100 border border-gray-300" style={{ borderRadius: 0, top: '50%', transform: 'translateY(-50%)' }} aria-label="Next">
         <svg width="32" height="32" fill="none" stroke="#FF6600" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
       </button>
+      {/* Modal for enlarged image on mobile */}
+      {enlarged && (
+        <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center md:hidden" onClick={() => setEnlarged(false)}>
+          <div className="relative max-w-full max-h-full flex items-center justify-center" onClick={e => e.stopPropagation()}>
+            <button onClick={() => setEnlarged(false)} className="absolute top-2 right-2 text-white bg-black bg-opacity-40 rounded-full p-2 z-10">
+              <svg width="32" height="32" fill="none" stroke="#fff" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <img src={img.src} alt={img.alt} className="max-w-[90vw] max-h-[80vh] rounded-xl shadow-lg" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -97,7 +118,7 @@ const About = () => {
     <section id="about" className="pt-24 pb-20 relative overflow-hidden">
       {/* Cool background gradient and pattern (now handled globally) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 md:hidden">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
             Why Choose Athlos Fitness Camp?
           </h2>
@@ -199,7 +220,7 @@ const About = () => {
 
       {/* Location Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-0 pt-24 pb-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-6">Where are we located?</h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-6">Camp Location</h2>
         <div className="flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden">
           {/* Left: Pavilion Image Carousel */}
           <LocationCardCarousel />

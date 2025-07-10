@@ -4,11 +4,14 @@ import HomePage from './pages/HomePage';
 import FAQPage from './pages/FAQPage';
 import ProgramDetailsPage from './pages/ProgramDetailsPage';
 
+// Component to scroll to top on route change
 function ScrollToTop() {
-  const location = useLocation();
+  const { pathname } = useLocation();
+
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-  }, [location.pathname]);
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return null;
 }
 

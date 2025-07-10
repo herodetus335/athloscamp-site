@@ -58,8 +58,57 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
             <ul className="space-y-2">
-              <li><span className="text-gray-300">703-865-1675</span></li>
-              <li><span className="text-gray-300">athlosfitnesscamp@gmail.com</span></li>
+              <li><a href="tel:703-865-1675" className="text-gray-300 hover:text-orange-500 transition-colors duration-200">703-865-1675</a></li>
+              <li>
+                <a 
+                  href="mailto:athlosfitnesscamp@gmail.com"
+                  onClick={(e) => {
+                    const email = 'athlosfitnesscamp@gmail.com';
+                    
+                    // Copy to clipboard with fallback methods
+                    const copyToClipboard = async (text: string) => {
+                      try {
+                        // Method 1: Modern clipboard API
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                          await navigator.clipboard.writeText(text);
+                          return true;
+                        }
+                        
+                        // Method 2: Fallback using textarea
+                        const textarea = document.createElement('textarea');
+                        textarea.value = text;
+                        textarea.style.position = 'fixed';
+                        textarea.style.opacity = '0';
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textarea);
+                        return true;
+                      } catch (err) {
+                        console.error('Failed to copy:', err);
+                        return false;
+                      }
+                    };
+                    
+                    copyToClipboard(email).then(success => {
+                      if (success) {
+                        // Show temporary notification
+                        const notification = document.createElement('div');
+                        notification.textContent = 'Email copied to clipboard!';
+                        notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-opacity duration-300';
+                        document.body.appendChild(notification);
+                        setTimeout(() => {
+                          notification.style.opacity = '0';
+                          setTimeout(() => notification.remove(), 300);
+                        }, 2000);
+                      }
+                    });
+                  }}
+                  className="text-gray-300 hover:text-orange-500 transition-colors duration-200"
+                >
+                  athlosfitnesscamp@gmail.com
+                </a>
+              </li>
             </ul>
           </div>
         </div>
