@@ -97,7 +97,24 @@ const Hero = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 ctas">
             <button 
-              onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => {
+                const element = document.querySelector('#contact');
+                if (element) {
+                  const isMobile = window.innerWidth < 768;
+                  if (isMobile) {
+                    const elementTop = (element as HTMLElement).offsetTop;
+                    const headerHeight = 64;
+                    const extraSpace = 20;
+                    const offsetPosition = elementTop - headerHeight - extraSpace;
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: 'smooth'
+                    });
+                  } else {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }
+              }}
               className="bg-orange-500 text-white px-8 py-4 lg:px-10 lg:py-5 rounded-lg text-lg lg:text-xl font-semibold hover:bg-orange-600 transition-all duration-300 hover:scale-105 shadow-lg"
             >
               Register Today - Save 10%!

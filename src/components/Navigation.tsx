@@ -57,6 +57,21 @@ const Navigation = () => {
           }, 500); // Delay to allow scroll to complete
         } else if (href === '#aboutme') {
           element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else if (href === '#contact') {
+          // Mobile-specific contact navigation with header visibility
+          const isMobile = window.innerWidth < 768;
+          if (isMobile) {
+            const elementTop = (element as HTMLElement).offsetTop;
+            const headerHeight = 64; // Navigation header height
+            const extraSpace = 20; // Additional spacing
+            const offsetPosition = elementTop - headerHeight - extraSpace;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          } else {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
         } else {
           element.scrollIntoView({ behavior: 'smooth' });
         }

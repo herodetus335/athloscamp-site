@@ -72,10 +72,22 @@ const Programs = () => {
     });
     window.dispatchEvent(event);
     
-    // Scroll to contact section
+    // Scroll to contact section with mobile header visibility
     const element = document.querySelector('#contact') as HTMLElement;
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        const elementTop = element.offsetTop;
+        const headerHeight = 64;
+        const extraSpace = 20;
+        const offsetPosition = elementTop - headerHeight - extraSpace;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      } else {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 

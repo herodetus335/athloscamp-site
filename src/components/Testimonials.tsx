@@ -104,7 +104,24 @@ const Testimonials = () => {
             Join hundreds of young athletes who have discovered their potential at Athlos Fitness Camp.
           </p>
           <button 
-            onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => {
+              const element = document.querySelector('#contact');
+              if (element) {
+                const isMobile = window.innerWidth < 768;
+                if (isMobile) {
+                  const elementTop = (element as HTMLElement).offsetTop;
+                  const headerHeight = 64;
+                  const extraSpace = 20;
+                  const offsetPosition = elementTop - headerHeight - extraSpace;
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                  });
+                } else {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }
+            }}
             className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 hover:scale-105"
           >
             Start Your Journey Today
