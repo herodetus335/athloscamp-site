@@ -95,7 +95,7 @@ const FAQPage = () => {
       questions: [
         {
           question: "How much does camp cost?",
-          answer: "Half-Day (9:00 AM–1:00 PM): $225\nFull-Day (9:00 AM–5:00 PM): $315\nSibling discount: 10% off each additional child"
+          answer: "Half-Day (9:00 AM–1:00 PM): $250\nFull-Day (9:00 AM–5:00 PM): $350\nSibling discount: 10% off each additional child"
         },
         {
           question: "What's included in the fee?",

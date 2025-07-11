@@ -240,7 +240,7 @@ const ProgramDetailsPage = () => {
                   to="/#contact"
                   className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors duration-200 hover:scale-105"
                 >
-                  Register Now - $250
+                  Register Now - $225
                 </Link>
                 <Link 
                   to="/faq"

@@ -221,8 +221,8 @@ const Contact = () => {
                     className="w-full px-2 py-2 sm:px-4 sm:py-4 border border-gray-300 rounded-md sm:rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-xs sm:text-base"
                   >
                     <option value="">Select Program</option>
-                    <option value="half-day">Half-Day Experience (9 AM–1 PM, $225)</option>
-                    <option value="full-day">Full-Day Experience (9 AM–5 PM, $315)</option>
+                    <option value="half-day">Half-Day Experience (9 AM–1 PM, $250)</option>
+                    <option value="full-day">Full-Day Experience (9 AM–5 PM, $350)</option>
                   </select>
                 </div>
               </div>
@@ -243,10 +243,13 @@ const Contact = () => {
                   <option value="block-1">Block 1 Only (July 21-25, 2025)</option>
                   <option value="block-2">Block 2 Only (July 28 - Aug 01, 2025)</option>
                   <option value="block-3">Block 3 Only (Aug 04-08, 2025)</option>
+                  <option value="blocks-1-2">Blocks 1 + 2 (July 21 - Aug 01, 2025)</option>
+                  <option value="blocks-1-3">Blocks 1 + 3 (July 21-25 & Aug 04-08, 2025)</option>
+                  <option value="blocks-2-3">Blocks 2 + 3 (July 28 - Aug 08, 2025)</option>
                   <option value="all-blocks">All 3 Blocks (July 21 - Aug 08, 2025)</option>
                 </select>
                 <p className="text-xs text-gray-500 mt-0.5 sm:mt-1 hidden sm:block">
-                  Choose individual blocks or save with all three!
+                  Choose individual blocks, combine any two, or save with all three!
                 </p>
               </div>
 
