@@ -22,11 +22,11 @@ const Payment = () => {
     {
       id: 'foundation-program',
       name: '5-Day Fitness Foundation Program',
-      dates: 'July 21-25, 2025',
+      dates: 'Aug 04-08, 2025',
       time: '9:00 AM - 1:00 PM',
-      price: 250,
-      originalPrice: 295,
-      discount: 15,
+      price: 225,
+      originalPrice: 250,
+      discount: 10,
       features: [
         'Expert coaching with Coach Mike',
         'Small group size (max 15 participants)',

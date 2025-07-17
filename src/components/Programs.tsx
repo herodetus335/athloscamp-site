@@ -9,10 +9,10 @@ const Programs = () => {
 
   const commonDetails = {
     title: "5-Day Fitness Foundation Program",
-    dates: "July 21-25, 2025",
+    dates: "Aug 04-08, 2025",
     ageRange: "6-13, all skill levels",
     groupSize: "15 (1 coach per group)",
-    capacity: "3 Groups Max"
+    capacity: "60+ Spots"
   };
 
   const programs = [
@@ -164,32 +164,31 @@ const Programs = () => {
           </h2>
           {/* Desktop-only paragraph */}
           <p className="hidden md:block text-xl text-blue-100 max-w-3xl mx-auto">
-            Three exciting blocks to choose from. Select half-day or full-day options that fit your family's schedule perfectly.
+            One fantastic week of fitness fun! Select half-day or full-day options that fit your family's schedule perfectly.
           </p>
           {/* Mobile-only centering wrapper */}
           <div className="md:hidden flex justify-center">
             <p className="text-xl text-blue-100 max-w-3xl text-center">
-              Three exciting blocks to choose from. Select half-day or full-day options that fit your family's schedule perfectly.
+              One fantastic week of fitness fun! Select half-day or full-day options that fit your family's schedule perfectly.
             </p>
           </div>
         </div>
 
-        {/* 3 Camp Blocks Row - Compact, before quick facts */}
-        <div className="hidden md:flex flex-row justify-center items-center gap-6 mb-8">
-          <div className="flex flex-col items-center bg-gradient-to-br from-blue-800/80 to-orange-400/80 rounded-2xl shadow-2xl px-16 py-4 min-w-[200px]">
-            <Calendar className="h-8 w-8 text-orange-200 mb-2" strokeWidth={2.5} />
-            <span className="text-lg font-bold text-orange-100">BLOCK 1</span>
-            <span className="text-base text-white font-semibold">July 21 - 25</span>
-          </div>
-          <div className="flex flex-col items-center bg-gradient-to-br from-blue-800/80 to-orange-400/80 rounded-2xl shadow-2xl px-16 py-4 min-w-[200px]">
-            <Calendar className="h-8 w-8 text-orange-200 mb-2" strokeWidth={2.5} />
-            <span className="text-lg font-bold text-orange-100">BLOCK 2</span>
-            <span className="text-base text-white font-semibold">July 28 - Aug 01</span>
-          </div>
-          <div className="flex flex-col items-center bg-gradient-to-br from-blue-800/80 to-orange-400/80 rounded-2xl shadow-2xl px-16 py-4 min-w-[200px]">
-            <Calendar className="h-8 w-8 text-orange-200 mb-2" strokeWidth={2.5} />
-            <span className="text-lg font-bold text-orange-100">BLOCK 3</span>
-            <span className="text-base text-white font-semibold">Aug 04 - 08</span>
+        {/* Single Camp Block - Centered and Prominent */}
+        <div className="hidden md:flex flex-row justify-center items-center mb-8">
+          <div className="flex flex-row items-center bg-gradient-to-r from-blue-800/80 via-blue-700/80 to-orange-400/80 rounded-2xl shadow-2xl px-8 py-4 min-w-[450px] max-w-[500px] transform hover:scale-105 transition-transform duration-300">
+            <div className="flex items-center justify-center mr-6">
+              <Calendar className="h-12 w-12 text-orange-200" strokeWidth={2.5} />
+            </div>
+            <div className="flex-1 text-left">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-3xl font-bold text-orange-100">2025 Schedule</span>
+                <div className="px-4 py-1.5 bg-orange-500/40 rounded-full ml-4">
+                  <span className="text-sm text-white font-medium">Limited Spots Available</span>
+                </div>
+              </div>
+              <span className="text-xl text-white font-semibold">August 04 - 08</span>
+            </div>
           </div>
         </div>
 
@@ -197,11 +196,15 @@ const Programs = () => {
         <div className="hidden md:block">
           {/* Our Offerings Gradient Quick Facts Strip - Larger */}
           <div className="flex justify-center mt-8 mb-5">
-            <div className="bg-gradient-to-br from-blue-800 via-orange-400 to-orange-500 rounded-full shadow-lg px-12 py-3 flex flex-row items-center justify-center gap-12 relative text-lg text-center" style={{ minWidth: '420px', fontWeight: 600 }}>
+            <div className="bg-gradient-to-br from-blue-800 via-orange-400 to-orange-500 rounded-full shadow-lg px-16 py-3 flex flex-row items-center justify-center gap-12 relative text-lg text-center" style={{ minWidth: '620px', fontWeight: 600 }}>
               <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-900 text-white text-[10px] px-2 py-0.5 rounded-full font-semibold tracking-wide shadow-sm">Per Block</span>
               <div className="flex items-center gap-3">
                 <CheckCircle className="w-6 h-6 text-white" />
                 <span className="font-semibold text-white text-sm">{commonDetails.capacity}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Users2 className="w-6 h-6 text-white" />
+                <span className="font-semibold text-white text-sm">4 Groups</span>
               </div>
               <div className="flex items-center gap-3">
                 <Users2 className="w-6 h-6 text-white" />
@@ -328,22 +331,21 @@ const Programs = () => {
 
         {/* Mobile Version - Hidden on desktop */}
         <div className="md:hidden">
-          {/* Block Dates Row - Text with Icon */}
-          <div className="flex justify-center gap-3 mb-6">
-            <div className="flex flex-col items-center bg-gradient-to-br from-blue-800/80 to-orange-400/80 rounded-2xl shadow-lg px-5 py-4 min-w-[100px]">
-              <Calendar className="h-7 w-7 text-orange-200 mb-1.5" strokeWidth={2.5} />
-              <span className="text-sm font-bold text-orange-100">BLOCK 1</span>
-              <span className="text-xs text-white font-semibold">July 21 - 25</span>
-            </div>
-            <div className="flex flex-col items-center bg-gradient-to-br from-blue-800/80 to-orange-400/80 rounded-2xl shadow-lg px-5 py-4 min-w-[100px]">
-              <Calendar className="h-7 w-7 text-orange-200 mb-1.5" strokeWidth={2.5} />
-              <span className="text-sm font-bold text-orange-100">BLOCK 2</span>
-              <span className="text-xs text-white font-semibold">July 28 - Aug 01</span>
-            </div>
-            <div className="flex flex-col items-center bg-gradient-to-br from-blue-800/80 to-orange-400/80 rounded-2xl shadow-lg px-5 py-4 min-w-[100px]">
-              <Calendar className="h-7 w-7 text-orange-200 mb-1.5" strokeWidth={2.5} />
-              <span className="text-sm font-bold text-orange-100">BLOCK 3</span>
-              <span className="text-xs text-white font-semibold">Aug 04 - 08</span>
+          {/* Single Block Date - Centered and Prominent */}
+          <div className="flex justify-center mb-6">
+            <div className="flex flex-row items-center bg-gradient-to-r from-blue-800/80 via-blue-700/80 to-orange-400/80 rounded-2xl shadow-lg px-8 py-4 min-w-[320px] max-w-[360px] transform hover:scale-105 transition-transform duration-300">
+              <div className="flex items-center justify-center mr-5">
+                <Calendar className="h-10 w-10 text-orange-200" strokeWidth={2.5} />
+              </div>
+              <div className="flex-1 text-left">
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-xl font-bold text-orange-100">2025 Schedule</span>
+                  <div className="px-3 py-1 bg-orange-500/40 rounded-full ml-3">
+                    <span className="text-xs text-white font-medium">Limited!</span>
+                  </div>
+                </div>
+                <span className="text-base text-white font-semibold">August 04 - 08</span>
+              </div>
             </div>
           </div>
 
@@ -428,15 +430,19 @@ const Programs = () => {
 
           {/* Sleek Quick Facts Panel */}
           <div className="flex justify-center mt-8 mb-5">
-            <div className="bg-gradient-to-br from-blue-800/90 via-blue-600/80 to-orange-400/80 rounded-full shadow px-5 py-2 flex flex-row items-center gap-6 relative">
+            <div className="bg-gradient-to-br from-blue-800/90 via-blue-600/80 to-orange-400/80 rounded-full shadow px-6 py-2 flex flex-row items-center gap-4 relative">
               <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-900 text-white text-[10px] px-2 py-0.5 rounded-full font-semibold tracking-wide shadow-sm">Per Block</span>
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-6 h-6 text-white" />
-                <span className="font-semibold text-white text-sm">{commonDetails.capacity}</span>
+                <CheckCircle className="w-5 h-5 text-white" />
+                <span className="font-semibold text-white text-xs">{commonDetails.capacity}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Users2 className="w-6 h-6 text-white" />
-                <span className="font-semibold text-white text-sm">15/group</span>
+                <Users2 className="w-5 h-5 text-white" />
+                <span className="font-semibold text-white text-xs">4 Groups</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users2 className="w-5 h-5 text-white" />
+                <span className="font-semibold text-white text-xs">15/group</span>
               </div>
             </div>
           </div>

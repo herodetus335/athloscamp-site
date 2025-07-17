@@ -355,7 +355,7 @@ const About = () => {
               <p className="text-md text-gray-600">Sheltered Pavilion • Restrooms • Ample Parking</p>
             </div>
             <div className="flex items-center space-x-3 mt-4">
-              <span className="inline-block bg-orange-500 text-white rounded-full px-4 py-2 text-sm font-semibold">Capacity: 45+ people</span>
+              <span className="inline-block bg-orange-500 text-white rounded-full px-4 py-2 text-sm font-semibold">Capacity: 60+ people</span>
             </div>
           </div>
         </div>

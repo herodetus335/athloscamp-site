@@ -1096,3 +1096,49 @@ body {
     padding: 0.5rem 1.5rem;
   }
 }
+
+/* iPhone SE specific fixes for hero section */
+@media (max-width: 375px) {
+  .hero .stats-mobile {
+    max-width: 20rem !important; /* 320px */
+    padding-left: 0.75rem !important; /* 12px */
+    padding-right: 0.75rem !important; /* 12px */
+    gap: 0.375rem !important; /* 6px */
+  }
+  
+  .hero .stat {
+    padding: 0.375rem !important; /* 6px */
+    min-height: 5rem !important; /* 80px */
+  }
+  
+  .hero .stat .bg-orange-200\/60 {
+    padding: 0.25rem !important; /* 4px */
+  }
+  
+  .hero .stat .h-4 {
+    height: 0.875rem !important; /* 14px */
+    width: 0.875rem !important; /* 14px */
+  }
+  
+  .hero .stat .text-xs {
+    font-size: 0.625rem !important; /* 10px */
+    line-height: 0.875rem !important; /* 14px */
+  }
+  
+  .hero .content {
+    padding-left: 0.75rem !important; /* 12px */
+    padding-right: 0.75rem !important; /* 12px */
+  }
+  
+  .hero h1 {
+    font-size: 2.25rem !important; /* 36px */
+    line-height: 2.5rem !important; /* 40px */
+    margin-bottom: 1rem !important; /* 16px */
+  }
+  
+  .hero .subhead {
+    font-size: 0.875rem !important; /* 14px */
+    line-height: 1.25rem !important; /* 20px */
+    margin-bottom: 1.5rem !important; /* 24px */
+  }
+}

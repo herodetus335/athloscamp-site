@@ -65,11 +65,11 @@ const FAQPage = () => {
         },
         {
           question: "What are your 2025 camp dates and hours?",
-          answer: "The camp is divided up by 3 Blocks, each Block being 5 consecutive days (no weekends), in total, spanning from July 21st to August 8th. The hours for the Part-Time camp are 9:00am to 1:00pm daily -- and the hours for Full-Time are 9:00am to 5:00pm daily."
+          answer: "Our 2025 camp runs for one week: August 4-8, 2025 (5 consecutive days, Monday through Friday). The hours for the Half-Day camp are 9:00am to 1:00pm daily -- and the hours for Full-Day are 9:00am to 5:00pm daily."
         },
         {
           question: "What is the maximum group size?",
-          answer: "Each group holds up to 15 kids with 1 dedicated coach; we run up to 3 simultaneous groups."
+          answer: "Each group holds up to 15 kids with 1 dedicated coach; we run up to 4 simultaneous groups with a total capacity of 60+ participants."
         }
       ]
     },

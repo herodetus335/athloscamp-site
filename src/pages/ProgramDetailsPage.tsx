@@ -233,7 +233,7 @@ const ProgramDetailsPage = () => {
                 Ready to Start Your Child's Fitness Journey?
               </h2>
               <p className="text-xl mb-8 opacity-90">
-                Limited to 45 total participants across 3 groups. Secure your child's spot today!
+                Limited to 60+ total participants across multiple groups. Secure your child's spot today!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link 
