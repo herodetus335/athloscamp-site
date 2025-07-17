@@ -182,7 +182,7 @@ const Programs = () => {
             </div>
             <div className="flex-1 text-left">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-3xl font-bold text-orange-100">2025 Schedule</span>
+                <span className="text-3xl font-bold text-orange-100">2025 Camp Dates</span>
                 <div className="px-4 py-1.5 bg-orange-500/40 rounded-full ml-4">
                   <span className="text-sm text-white font-medium">Limited Spots Available</span>
                 </div>
@@ -339,7 +339,7 @@ const Programs = () => {
               </div>
               <div className="flex-1 text-left">
                 <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-xl font-bold text-orange-100">2025 Schedule</span>
+                  <span className="text-xl font-bold text-orange-100">2025 Camp Dates</span>
                   <div className="px-3 py-1 bg-orange-500/40 rounded-full ml-3">
                     <span className="text-xs text-white font-medium">Limited!</span>
                   </div>

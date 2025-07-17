@@ -72,7 +72,7 @@ const Hero = () => {
               <div className="w-full">
                 <div className="text-xs sm:text-xs lg:text-base font-bold text-orange-100">Aug 04 - 08</div>
                 <div className="w-4 sm:w-5 lg:w-6 mx-auto border-b border-orange-100/60 my-1 sm:my-1" />
-                <div className="text-xs sm:text-xs lg:text-sm text-white font-semibold sm:font-semibold leading-tight">2025 Schedule</div>
+                <div className="text-xs sm:text-xs lg:text-sm text-white font-semibold sm:font-semibold leading-tight">Camp Dates</div>
               </div>
             </div>
             <div className="flex flex-col items-center justify-center bg-white/15 backdrop-blur-[8px] rounded-lg sm:rounded-lg p-2 sm:p-2 lg:p-3 stat w-full text-center hover:scale-105 transition-transform duration-300">
