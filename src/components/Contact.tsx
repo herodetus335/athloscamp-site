@@ -273,7 +273,7 @@ const Contact = () => {
                   <span className="text-orange-600 font-semibold text-xs sm:text-base">🎉 Early Bird Discount Available!</span>
                 </div>
                 <p className="text-xs sm:text-sm text-orange-800 leading-tight">
-                  Register by July 14th and save 10% on your selected program. Discount will be applied automatically.
+                  Register by July 21st and save 10% on your selected program. Discount will be applied automatically.
                 </p>
               </div>
 
